@@ -1,0 +1,14 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_30d_sign_-1_XL_DOGEUSDT_15m_0_t64b67279",
+  "exchange": "Bybit",
+  "symbol": "DOGEUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 30-day funding rate z-scores (|z| > 1.5) reflect unsustainable speculative carry imbalances where long positions pay heavy funding fees to short positions. When retail positioning is heavily crowded long (long_short_ratio_zscore_7d > 1.5) and order flow begins to diverge or lean opposite (taker_buy_ratio_1h opposite side), the cumulative cost of carry forces leveraged longs into liquidation cascades, driving predictable mean-reversion price declines over 1h to 4h horizons.",
+  "narrative": "Perpetual futures markets feature continuous funding rate settlements to anchor contract prices to index spot. When funding rate z-score over a 30-day lookback exceeds 1.5 standard deviations, speculative longs are paying abnormal carry premiums to maintain exposure. This creates an inherently asymmetric structural vulnerability: holding long becomes progressively expensive, requiring constant upward momentum to justify margin lockup. When top-trader or account-level long/short ratios become stretched (long_short_ratio_zscore_7d > 1.5), retail optimism is at an extreme and marginal buyer purchasing power is exhausted. As soon as aggressive taker flow stalls or turns net negative (taker_buy_ratio_1h opposite side or low), the absence of aggressive buyers triggers carry unwinds. Forced liquidations and stop-loss clustering create a rapid downward mean-reversion drift that persists over short-to-intermediate horizons (1h to 4h) before finding new equilibrium depth.",
+  "research_rationale": "Search scope is set to 'full' to thoroughly evaluate Layer 2.5 composition interactions and gates across candidate horizons. The design directly implements recommendations from inspect_catalog gene knowledge: funding_extreme mechanisms require exposure and flow confirmation. We couple funding_rate_zscore_30d with taker_buy_ratio_1h via gate_opposite_side, gate_high, and gate_low to capture flow divergence while mitigating dominant cemetery kill codes related to premature entry during strong trending momentum. Furthermore, pairing with long_short_ratio_zscore_7d via gate_high and interaction terms incorporates retail crowding without adding noise, achieving 1.0 coverage and exceeding T1 event floor requirements. This strictly differentiates the experiment from prior queued runs and isolates the carry unwind alpha."
+}

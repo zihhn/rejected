@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_liquidation_imbalance_1h_sign_1_XL_alttheme_15m_0_ta98ea1e8",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "On alt_theme perps at 15m bars, hours whose liquidations are one-sided (|liquidation_imbalance_1h| > 0.8) and large against the day (liquidation_total_zscore_24h > 2) are followed over 30m to 4h by a partial reversal of the forced side's price impact: forward returns are positive after long liquidations (imbalance > 0, forced selling) and negative after short liquidations (imbalance < 0, forced buying).",
+  "narrative": "Who had to transact: leveraged traders whose margin fell below maintenance had their positions closed by the exchange's liquidation engine as market orders, whatever the price. When one side dominates the hour's liquidations and the hour's liquidation total is more than two sigma above its own last day, those forced orders take liquidity faster than market makers refill it, so price is pushed past where voluntary traders value it. The forced seller (or buyer) has no view and leaves once the queue clears; makers and mean-reversion traders then buy back the overshoot after long liquidations and sell it back after short liquidations. The forward return over 30m to 4h is therefore opposite to the forced side: positive when liquidation_imbalance_1h > 0 (longs liquidated, forced selling), negative when it is < 0. The composition terms on return_1h say where that impact has to be: gate_opposite_side keeps the candidate bars where the hour's return moved strongly (beyond 1.5 sigma of its 24h scale) in the forced direction, which is the price move that should revert; gate_high and gate_low on return_1h are the controls the side-tied gate needs, so a reversal of any large hour, whatever the liquidations, shows up in them as well.",
+  "research_rationale": "Anchor: locked basket-wide lab candidate XL_alt_theme_47278a7aee48 on alt_theme (8 members), predicate |liquidation_imbalance_1h| > 0.8 AND liquidation_total_zscore_24h > 2 on 15m bars: 10,707 of 330,164 bars (3.2%), 9,084 episodes (median 1 bar), 414 independent days, every member 250-361 days; both sides of the gene (5,698 positive, 5,009 negative), so the sign is the gene relation (sign_basis gene_relation, direction +1). T1 day rule projects 195 of 281 days (short of 250) but the event unit projects 2,343-3,440 observations across the band, so T1.11 scores it per event. Two expressions were evaluated in the plan; the second only added abs(return_1h) > 0 to measure coupling and was not locked. What the evidence does not show: (a) provenance: in the scan window each member has about 391 estimated-liquidation days (OHLCV estimate, side = candle direction) and 38 observed days, while the T1 window has about 244 observed and 33 estimated days per member; the total z threshold behaves alike on both sources (p95 2.14 estimated, 2.03 observed) and the predicate fires more on observed days (4.7% vs 3.1%), but the scan cannot show the claim on observed liquidations; (b) on predicate bars the imbalance and return_1h sit on the same side on only 14.7% of bars (panel 26.9%): the predicate is close to large one-sided candle hours, a price-reversal explanation I cannot rule out here; (c) 61% of predicate rows share a bar with another member (21% if independent): many events are market-wide liquidation waves. Terms: no gene prior row exists for this statistic, so every term is exploratory; the gene-pair ledger has no row for liquidation_imbalance_1h x return_1h. gate_opposite_side follows the mechanism (impact that must revert) and gate_high/gate_low are its required controls. Cemetery: 1,097 trials on this gene, 12 survived T1, 860 killed at T0.04-IC-STAT: dense imbalance formulas over every bar have too little IC; this design answers it by scoring the claim only on bursts (an event formula), and the seven anchor templates stay as the dense baseline expected to die there again. search_scope committed: the locked predicate is the test; the grid would add dense couplings the cemetery already killed. Earlier attempts on this slice committed liquidation_imbalance_15m and _24h with sign -1 (continuation); I register reversal because the mechanism is temporary impact of forced flow on a trailing hour conditioned on a burst, not the 15m or 24h imbalance level. conditional_prediction ranging > trending: in a trend liquidation waves feed the move; in a range the forced overshoot reverts. Predicate bars sit 46% ranging and 50% trending."
+}

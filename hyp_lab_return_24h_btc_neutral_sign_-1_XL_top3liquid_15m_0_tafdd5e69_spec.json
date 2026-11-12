@@ -1,0 +1,18 @@
+{
+  "hypothesis_id": "hyp_lab_return_24h_btc_neutral_sign_-1_XL_top3liquid_15m_0_tafdd5e69",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 24-hour idiosyncratic return deviations of altcoins relative to Bitcoin (return_24h_btc_neutral) exhibit short-term price mean-reversion over 1h to 4h horizons when aggressive taker order flow exhausts and turns against the prevailing idiosyncratic move.",
+  "narrative": "In cryptocurrency derivatives markets, major altcoins (ETH, SOL) frequently experience sharp idiosyncratic price dislocations relative to Bitcoin due to localized speculative surges, aggressive liquidations, or retail chasing. When an altcoin's 24-hour return diverges by more than 2% after hedging out BTC beta (return_24h_btc_neutral > 0.02 or < -0.02), cross-market arbitrageurs and institutional market makers typically seek to fade the dislocation once momentum stalls. The core trigger mechanism is order flow exhaustion: when 1-hour taker buy volume ratio swings against the direction of the 24-hour idiosyncratic deviation (captured by gate_opposite_side on taker_buy_ratio_1h), aggressive directional chasing has dried up and opposing taker pressure begins driving price back toward beta-neutral equilibrium. The inclusion of gate_high and gate_low controls on taker_buy_ratio_1h directly isolates the necessity of opposing taker flow versus generic buying or selling pressure. Furthermore, gate_tail on Garman-Klass volatility conditions on periods of elevated market activity where mispricings are wider and liquidity replenishment creates stronger mean-reverting velocity.",
+  "research_rationale": "This hypothesis investigates the cross-sectional mean-reversion of idiosyncratic returns following inherited pre-registration plan_5dd746998d79ce08584f on candidate_stat lab_return_24h_btc_neutral. In the gene_knowledge priors, taker_buy_ratio_1h is pre-specified with sufficient confidence (n=60, shrink_weight=0.75) as an opposite-side trigger for btc_residual_return reversal, which our composition plan directly adopts via gate_opposite_side, supported by gate_high and gate_low controls to verify side-tie independence. Looking at the cemetery records for return_24h_btc_neutral, the dominant historical kill code is T0.04-IC-STAT (1089 of 1197 deaths), reflecting that raw unconditioned idiosyncratic returns drift with high noise and fail unconditional IC thresholds. Crucially, cemetery survivor analysis indicates that survival was achieved almost exclusively at shorter intraday horizons (6 survivors at 1h, 1 at 2h, 0 at 4h+). By restricting the condition in expression_lab to significant idiosyncratic deviations (|return_24h_btc_neutral| > 0.02, 396 independent event days, reaches_t1_floor: true) and testing across the 1h to 4h horizon band, we address the low signal-to-noise ratio that caused prior unconditioned deaths. We select search_scope='full' to evaluate the pre-registered terms while permitting the automatic grid to explore interaction variants."
+}

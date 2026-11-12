@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_long_short_ratio_zscore_4h_sign_-1_XL_alttheme_15m_0_t06945181",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme retail sentiment crowding on altcoins (4-hour rolling z-score of account long/short ratio |z| > 1.6) predicts a contrarian mean-reversion over 30m-4h horizons, which accelerates when triggered by aggressive taker flow leaning against the crowded position and when occurring in overextended price trends.",
+  "narrative": "The economic mechanism models retail positioning crowding and subsequent inventory exhaustion in altcoin perpetual contracts. When retail traders crowd heavily onto one side over an intermediate 4-hour window (|long_short_ratio_zscore_4h| > 1.6), liquidity providers and market makers absorb this directional flow, leaving resting depth vulnerable to sudden reversals once retail buying/selling power is exhausted. The sign chain is reconstructed as follows: channel_sign = +1 (price channel of retail long/short ratio, where +1 denotes long crowd positioning); anomaly_direction = +1 (evaluated on the positive long-crowded side of long_short_ratio_zscore_4h); response_polarity = -1 (exhaustion and mean-reversion contrarian response against the crowd). The resulting predicted_sign is channel_sign (+1) * anomaly_direction (+1) * response_polarity (-1) = -1. On the short-crowded side (z < -1.6), anomaly_direction is -1, yielding predicted price direction = (+1) * (-1) * (-1) = +1 (contrarian rally), exactly mirroring the positive side and establishing a negative linear IC relation between the sentiment z-score and forward return. To transform this continuous sentiment state into a tradeable execution event, two partners are conditioned: (1) taker_buy_ratio_1h acts as the catalytic order flow trigger; unconditioned crowding can persist, but when market aggressors actively trade against the crowd (gate_opposite_side: takers selling when retail is long, or takers buying when retail is short), the crowded position is forced into liquidation or stop-out. Control gates gate_high and gate_low on taker_buy_ratio_1h are committed alongside it. (2) trend_sma_ratio_24h acts as the momentum extension control (gate_tail); crowd reversals are most potent when prices have already stretched far from their 24h moving average (|z| > 2), minimizing continuation risk. In ranging regimes, this mean-reverting exhaustion operates with highest efficacy compared to strong trending regimes.",
+  "research_rationale": "This commitment follows both prior economic theory and the empirical findings of the alpha cemetery. Prior table gene_knowledge.priors indicates that sentiment_crowding mechanisms benefit from an aggressive flow trigger (taker_buy_ratio_1h, direction opposite_side) and a momentum stretch control (trend_sma_ratio_24h, direction tail). In the cemetery for long_short_ratio_zscore_4h, single-gene formulas completely failed T0 (135 trials, 0 survived) due to dominant kill code T0.04-IC-STAT (1757 total trials), proving that raw unconditioned sentiment is too noisy. However, pairing with taker_buy_ratio_1h under kind min was the top surviving combination in the entire cemetery (120 trials, 18 survived, 15% survival rate), while trend_sma_ratio_24h produced 10 survived trials under min and 8 under gate_high. Furthermore, cemetery survival was heavily concentrated at 30m (10.9% survival) and 1h (5.0% survival), directly informing our choice of predicted_horizon_band [30m, 1h, 2h, 4h]. We author gate_opposite_side on taker_buy_ratio_1h to capture flow opposing the crowd, along with required control gates gate_high and gate_low, and gate_tail on trend_sma_ratio_24h. We select search_scope='full' to permit the automatic composition grid to explore couplings across these three validated genes. We note earlier attempt 13 on this slice which used lab_long_short_ratio_zscore_30d; our plan adopts the 4h window variant (long_short_ratio_zscore_4h) because 4h sentiment features zero autocorrelation at 1d (autocorr = -0.003), ensuring genuine independent daily observations rather than multi-week carry regimes."
+}

@@ -1,0 +1,21 @@
+{
+  "hypothesis_id": "hyp_lab_return_30m_btc_neutral_sign_-1_XL_majors_15m_0_tc0ff98ac",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Idiosyncratic 30-minute returns in major altcoins orthogonalized against BTC (return_30m_btc_neutral) exhibit mean-reversion over 30m to 4h horizons. When altcoin idiosyncratic returns deviate sharply (|return_30m_btc_neutral| > 35 bps), cross-asset arbitrageurs fade the deviation, especially when aggressive taker flow (taker_buy_ratio_1h) exhausts or when resting order book depth (depth_imbalance_10) provides passive absorption.",
+  "narrative": "When a major altcoin experiences a sharp 30-minute return shock independent of BTC market moves, the price excursion is predominantly driven by localized taker liquidity consumption or transient inventory imbalances rather than systematic fundamental reassessment. In crypto markets, where BTC dictates macro directional beta, unbacked idiosyncratic spikes trigger cross-asset statistical arbitrageurs to sell rich alts against BTC hedges or buy cheap alts. Conditioning on taker aggression (taker_buy_ratio_1h) differentiates unbacked exhaustion from informed continuation: when aggressive flow opposes the idiosyncratic move, price quickly mean-reverts. Simultaneously, resting depth imbalance (depth_imbalance_10) quantifies the resting liquidity queue available to absorb the exhaustion move.",
+  "research_rationale": "Anchor candidate XL_majors_818b83bc2089 isolates bars where |return_30m_btc_neutral| > 0.0035, yielding 34,907 matched bars, 410 active days, and 393 scored days, easily passing the T1 floor (projected_t1_days=257 vs 250 floor). Autocorrelation at 1h is -0.010, confirming absence of long-memory state confounding. In gene_knowledge priors, taker_buy_ratio_1h is the primary established trigger partner (n=60, confidence sufficient, shrink_weight 0.75), and depth_imbalance_10 acts as the order book absorption partner. Anchor cemetery analysis shows 449 kills under T0.04-IC-STAT due to unconditioned one-sided filtering; our symmetric two-sided predicate preserves two-sided IC ranking variability across 410 independent days. Horizons are focused on 30m to 4h, where historical survival rate is highest (5% at 1h vs 1.1% at 4h)."
+}

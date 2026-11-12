@@ -1,0 +1,23 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_30d_sign_-1_XL_alttheme_15m_0_tdc1f52c9",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Persistent positive extreme funding rate z-scores over a trailing 30-day baseline (funding_rate_zscore_30d > 1.0) reflect leveraged long positioning crowding across alt_theme perpetual futures. When aggressive taker buying halts and taker selling appears (taker_buy_ratio_1h gate_low), the elevated financing costs of maintaining carry induce profit taking and forced long liquidation, generating negative forward returns over 1h to 4h horizons.",
+  "narrative": "Perpetual futures markets require longs to pay periodic funding to shorts when perp prices trade at a premium to spot. When funding_rate_zscore_30d exceeds 1.0 standard deviation above its trailing 30-day baseline, long speculators have accumulated substantial levered directional exposure and are paying historically elevated carry fees. Maintaining these long positions requires ongoing aggressive capital inflows to offset financing decay. Once aggressive buying subsides and taker order flow shifts toward selling (taker_buy_ratio_1h < -1.5 sigma / gate_low), the crowded longs face adverse selection and decaying carry. Traders rush to exit or get liquidated, triggering an inventory rebalance cascade that drives price downward. Conditioning on open interest expansion (oi_change_pct_4h gate_high) captures regimes where leveraged capital overhang is maximal, amplifying the magnitude of the subsequent unwind. Gate controls (gate_high on taker flow and gate_low on OI) isolate whether the edge specifically requires aggressive selling into high open interest rather than generalized market momentum.",
+  "research_rationale": "Match rate is 8.83% (27,138 matched rows across 8 alt_theme symbols, 147 independent events, reaching the T1 observation floor via the event unit with 2,396 projected observations at 60m). The evidence reflects historical frequencies on Bybit 2024-06 to 2025-08 and does not guarantee out-of-sample edge in T1; extreme funding can persist during strong structural bull trends where carry costs are absorbed by spot momentum. The design directly follows gene_knowledge.priors where taker_buy_ratio_1h (gate_low) is the primary trigger partner with n=36 and sufficient confidence, and oi_change_pct_4h (gate_high) is the exposure partner with n=18. Control gates (gate_high on taker flow and gate_low on OI) are committed to test separation against momentum. In the cemetery for funding_rate_zscore_30d, 785 of 949 evidential kills occurred at T0.04-IC-STAT for unconditioned dense formulas. By applying the locked event predicate (funding_rate_zscore_30d > 1.0) and gating with taker selling and OI expansion, we convert continuous dense trading into sparse event-driven regimes that concentrate signal power during forced unwind bars, reducing fee degradation and raising t-statistics above the T0.04 floor. Search scope full is selected to enable the Layer 2.5 automatic grid to explore couplings across the anchor and probed partners while evaluating our pre-registered gated seeds."
+}

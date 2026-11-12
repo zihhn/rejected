@@ -1,0 +1,17 @@
+{
+  "hypothesis_id": "hyp_lab_long_short_ratio_zscore_7d_sign_-1_XL_btcethduo_15m_0_tcc1e7ee1",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme crowd sentiment imbalance measured by 7-day account long/short ratio z-scores (abs(long_short_ratio_zscore_7d) > 1.65) predicts short-term price reversal over 1h-4h horizons on major crypto assets (BTCUSDT, ETHUSDT), driven by retail inventory exhaustion and subsequent adverse absorption by liquidity providers, particularly when aggressive taker flow moves against the crowded direction.",
+  "narrative": "In cryptocurrency perpetual futures, retail and unhedged market participants frequently display sentiment herd behavior, accumulating heavily directional long or short account positions following sustained directional moves. When the 7-day long/short account ratio reaches extreme standard deviations (|z| > 1.65), crowd positioning becomes overextended. Liquidity providers and institutional arbitrageurs who absorb this inventory gradually require larger risk premia. When aggressive order flow (taker buy ratio 1h) turns against the crowded side (gate_opposite_side)—for instance, when aggressive sellers enter a market where accounts are crowded long—the crowded side faces inventory exhaustion and margin pressure. Unable to support prices, marginal longs are liquidated or forced to close, driving a short-term price reversal over 1h to 4h horizons. Conversely, when accounts are heavily crowded short and aggressive buyers step in, short covering cascades create an upward squeeze. Conditioning on trend_sma_ratio_24h ensures that the mechanism identifies overextended crowd extremes rather than early-stage institutional momentum.",
+  "research_rationale": "Locked lab candidate XL_btc_eth_duo_c89372789c6c on abs(long_short_ratio_zscore_7d) > 1.65 matches 17,149 bars (21.11% match rate) across 317 independent event days, with balanced distribution (9,112 positive and 8,037 negative bars) across BTCUSDT (230 events) and ETHUSDT (249 events). T1 scoring projects 2,339 event observations at 60m (well above the 250 floor). Historical cemetery analysis shows 2,535 trials on long_short_ratio_zscore_7d dominated by T0.04-IC-STAT (2,126 trials) due to continuous evaluation on uncrowded bars diluting the signal; historical survivors were concentrated at 1h (13) and 2h (7). Our design answers this by gating on extreme crowding events (|z| > 1.65). The terms follow the gene_knowledge.priors table by using taker_buy_ratio_1h as trigger (gate_opposite_side, with gate_low and gate_high controls) and trend_sma_ratio_24h as stretch control (gate_tail). What evidence does not show: whether the effect persists beyond 4h or holds on less liquid altcoins."
+}

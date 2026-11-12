@@ -1,0 +1,18 @@
+{
+  "hypothesis_id": "hyp_lab_return_4h_btc_neutral_sign_-1_XL_top3liquid_15m_0_tccc2972d",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Major liquid altcoins (ETH, SOL) undergoing extreme 4-hour idiosyncratic return deviations from Bitcoin (|residual| > 1.0%) experience predictable mean-reversion over 1h to 4h horizons as localized liquidity imbalances and aggressive taker exhaustion subside.",
+  "narrative": "In digital asset markets, price action among major layer-1 altcoins (ETH, SOL) is dominated by market-wide Bitcoin beta over long horizons. However, over intermediate intraday windows such as 4 hours, localized speculative positioning, perpetual swap liquidations, and concentrated taker order flows frequently decouple altcoin price paths from BTC, creating extreme idiosyncratic residuals (|return_4h_btc_neutral| > 1.0%). Because these deviations are largely driven by aggressive market orders demanding immediate liquidity rather than fundamental structural shifts, the price moves temporarily overshoot fair-value equilibrium. As aggressive taker flow exhausts and trading volume surges, passive market makers absorbing the shock on opposite book depth and statistical arbitrageurs trading the cross-currency spread step in to provide counterparty liquidity. This inventory rebalancing exerts opposing price pressure, resulting in systematic mean-reversion toward the market baseline over the subsequent 1 to 4 hours.",
+  "research_rationale": "Anchor candidate XL_top3_liquid_9e15e2c73747 is locked on the top3_liquid universe across 17,759 matched bars (22.61% match rate) and 407 active days and independent events, displaying robust symmetric distribution across positive (8,730) and negative (9,029) episodes. In cemetery analysis, return_4h_btc_neutral accumulated 416 trials with 40 T1 passes (9.6% survival), where primary kills were T0.04-IC-STAT (245) due to continuous signal noise in calm markets and T1.20-REGIME-FILTER (61). Conditioning via expression_lab on the outer tail (|residual| > 0.01) filters out low-signal regimes. In gene priors, taker_buy_ratio_1h is registered as a trigger partner with sufficient confidence (n=60, shrink_weight=0.75), where flow opposite to the move confirms exhaustion; we commit gate_low and gate_high as directional controls. Depth_imbalance_10 and volume_ratio_1h act as absorption and volume surge partners (both with 1.0 coverage and robust T1 projections). Full search scope is selected to allow Layer 2.5's automatic grid to test interaction and gating combinations alongside authored terms."
+}

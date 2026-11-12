@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_book_pressure_5min_sign_1_XL_alttheme_15m_0_t6d2ed5e0",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "We hypothesize that persistent top-of-book queue pressure (|book_pressure_5min| > 0.70) creates a directional price drift over 30m to 4h horizons that continues in the direction of the dominant queue (predicted_sign = +1 on the positive imbalance side, mirroring negatively), and this continuation edge is significantly strengthened when confirmed by deeper orderbook depth (depth_imbalance_10 gate_same_side) under competitive liquidity conditions (tight spread_bps). Conversely, isolated top-of-book pressure unsupported by deeper liquidity represents transitory quote flicker that quickly mean-reverts.",
+  "narrative": "In modern continuous double auction crypto perpetual markets, liquidity providers post limit orders at the top of the book based on inventory management and informed adverse selection signals. When the level-0 queue imbalance exceeds +-0.70 over a trailing 5-minute window, the dominant side exhibits substantial resting capital commitment (bid_q_0 >> ask_q_0 or vice versa). Market makers on the heavier side actively absorb opposing flow and defend their inventory, forcing aggressive takers to cross the spread into the thinner book side where liquidity is scarce. This dynamic generates an asymmetric execution cost that naturally propels price in the direction of the queue imbalance. Furthermore, when deeper levels of the book (depth_imbalance_10) align on the same side (gate_same_side), the resting depth reflects genuine institutional liquidity rather than fleeting top-of-book spoofing, preventing adverse selection and driving sustained multi-bar price continuation. When spreads are tight (spread_bps gate_low), market making friction is minimized, ensuring that queue pressure translates cleanly into forward return without being dissipated in execution slippage.",
+  "research_rationale": "The candidate XL_alt_theme_6a9512bacdb9 pre-registers a symmetric condition on book_pressure_5min (|imbalance| > 0.70) across the alt_theme basket, matching 146,848 rows (44.47% match rate) across all 8 altcoin symbols with 430 active days, 77,944 episodes, and 421 scored days in T1 projection (well above the 250-day floor). Autocorrelation is minimal (rho_1bar = 0.015, rho_1d = 0.0003), confirming that observations represent dynamic microstructural episodes rather than persistent macro regimes. What the evidence does not show: the scan window evaluation is purely descriptive of historical match frequency and does not measure forward returns or p-values. Cemetery analysis for book_pressure_5min revealed 144 prior trials with 2 T1 in-sample survivals, dominated by 92 evidential kills at T0.04-IC-STAT and 38 at T1.10-ICIR, indicating that raw, unconditioned book pressure is too noisy to clear linear IC hurdles. Our design directly addresses these historical kill codes by: (1) applying an explicit |imbalance| > 0.70 threshold to discard indeterminate queue noise; (2) coupling with depth_imbalance_10 via gate_same_side to filter out spoofed top-of-book walls; (3) including gate_high and gate_low on depth_imbalance_10 as required side-tied controls; and (4) restricting to short intraday horizons (30m, 1h, 2h, 4h) where microstructure queue dynamics dominate over macro drift."
+}

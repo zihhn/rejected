@@ -1,0 +1,21 @@
+{
+  "hypothesis_id": "hyp_lab_lower_ratio_pct_sign_1_XL_majors_15m_0_t8ebdf859",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "On 15-minute bars in major crypto perpetuals (majors: BTC, ETH, BNB, SOL, XRP), candles exhibiting extreme lower wick ratios (lower_ratio_pct > 0.70) reflect aggressive intra-bar buying support that absorbs downside supply. When conditioned on elevated volume (volume_ratio_1h > 1.5 sigma), aggressive taker buy order flow (taker_buy_ratio_1h > 1.5 sigma), or resting bid depth support (depth_imbalance_10 > 1.5 sigma), the exhaustion of sellers and dominant buyer absorption predicts positive forward returns (predicted_sign = +1) over short-term horizons spanning 30 minutes to 4 hours.",
+  "narrative": "During intra-bar price discovery, aggressive selling pressure frequently pushes prices into intraday support zones or local liquidity pockets. When price rejects the low and rallies back toward or above the open, it forms a pronounced lower wick or pin-bar structure (lower_ratio_pct > 0.70, where lower wick dominates the combined body and lower shadow). This mechanical footprint indicates that limit bids or active dip-buyers rapidly absorbed the market selling volume, exhausting the available supply at the low.\\n\\nTo distinguish meaningful institutional absorption from low-volume drift, the economic mechanism conditions on three complementary market-structure partners:\\n1. Elevated trading volume (volume_ratio_1h in gate_high): High turnover confirms substantial capital exchange and genuine absorption of sellers rather than an illiquid bounce on sparse order books.\\n2. Aggressive taker buy flow (taker_buy_ratio_1h in gate_high): Taker buying exceeding 1.5 sigma indicates that active buyers are crossing the spread to seize liquidity, ensuring upward continuation momentum.\\n3. Resting order book bid support (depth_imbalance_10 in gate_high): Structural resting bids in the top-10 levels absorb residual selling and disincentivize downward continuation.\\n\\nBecause sellers have been exhausted at the wick extreme and buyers have established control, price is predicted to continue upward (predicted_sign = +1) over horizons of 30m, 1h, 2h, and 4h.",
+  "research_rationale": "Anchor statistics: The anchor lower_ratio_pct is pre-registered on the lab route for the majors basket (BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT) at 15m cadence. Over the 206,400-bar scan panel, lower_ratio_pct averages 0.3816 with std 0.2813 and consistent median per symbol (0.320 to 0.356). Autocorrelation is near zero (-0.002 at 1 bar, 0.002 at 1 day), confirming that lower wick events are independent micro-shocks rather than persistent states.\\n\\nCondition and overlap: The locked condition lower_ratio_pct > 0.70 selects 34,903 bars (16.9% match rate) across 430 active days, yielding 430 independent events with 275 projected T1 scored days, comfortably clearing T1's 250-day requirement (observation_unit: day).\\n\\nPartner choices and gene knowledge: Lower_ratio_pct is outside the classical prior table (untested in prior trials, cemetery trials: 0). The design incorporates three principled partners: (1) volume_ratio_1h (gate_high), which projects 267 scored T1 days and exhibits minimal anchor correlation (0.001); (2) taker_buy_ratio_1h (gate_high), projecting 273 scored T1 days with near-zero anchor correlation (-0.047); and (3) depth_imbalance_10 (gate_high), projecting 271 scored T1 days with -0.035 correlation. All three partners achieve 100% panel coverage and are live-servable. Search scope 'full' is selected to evaluate both authored gates and automated grid mutations."
+}

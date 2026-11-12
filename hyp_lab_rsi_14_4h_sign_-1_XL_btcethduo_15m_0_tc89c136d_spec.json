@@ -1,0 +1,18 @@
+{
+  "hypothesis_id": "hyp_lab_rsi_14_4h_sign_-1_XL_btcethduo_15m_0_tc89c136d",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h",
+    "12h"
+  ],
+  "hypothesis_text": "On BTCUSDT and ETHUSDT perpetual futures, when 4-hour RSI exceeds 57.0 (top ~7% overbought tail) and aggressive order flow slows (taker_buy_ratio_1h in gate_low), forward returns over 1h to 12h exhibit negative price continuation (mean reversion downwards, predicted_sign = -1) driven by momentum exhaustion and leveraged position unwinding.",
+  "narrative": "Perpetual futures contracts for BTC and ETH experience periodic speculative momentum surges where directional buying over 14 four-hour periods (56 hours) pushes RSI above 57.0 (top 7% tail of the historical distribution). Market makers and arbitrageurs absorb this one-sided flow by accumulating short inventory against order book resistance. When aggressive taker flow exhausts (taker_buy_ratio_1h z-score falls into gate_low), marginal buyers cease paying premium holding costs. Leveraged long traders are forced to take profit or stop out as buying support evaporates, while arbitrageurs hedge inventory, triggering predictable downward price mean reversion over intermediate horizons of 1h to 12h.",
+  "research_rationale": "Anchor condition rsi_14_4h > 57.0 selects the upper 7.04% tail of 4h RSI on btc_eth_duo (5,780 matched bars, 398 episodes, 126 independent events, t1 reaches_t1_floor: true with 782 projected event observations at 60m). Following gene_knowledge.priors for rsi_extreme, taker_buy_ratio_1h serves as a trigger partner (role: trigger, prior n=36, shrink_weight=0.643) where gate_low identifies flow exhaustion opposing the stretched side, while gate_high acts as the positive flow control. long_short_ratio_zscore_7d serves as an exposure partner (role: exposure, prior n=36, shrink_weight=0.643) testing position unwinding. Cemetery records show 0 prior trials for rsi_14_4h (untested), free of historical kill codes. Search scope 'full' is chosen to explore automated grid combinations alongside the authored gated terms."
+}

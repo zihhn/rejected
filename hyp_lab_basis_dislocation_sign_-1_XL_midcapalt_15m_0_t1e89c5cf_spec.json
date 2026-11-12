@@ -1,0 +1,18 @@
+{
+  "hypothesis_id": "hyp_lab_basis_dislocation_sign_-1_XL_midcapalt_15m_0_t1e89c5cf",
+  "exchange": "Bybit",
+  "symbol": [
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme futures-spot price basis dislocation (|zscore(basis_dislocation)| > 1.5) on midcap altcoins (BNBUSDT, SOLUSDT, XRPUSDT) signals an unsustainable pricing deviation between perpetual futures and spot index prices. Driven by arbitrage realignment and the unwinding of over-extended positioning, perpetual futures prices mean-revert toward spot over 1h to 4h horizons (predicted_sign = -1 on the positive dislocation side, and symmetrically positive on the negative side). This effect is strongly reinforced when open interest is rapidly expanding (oi_change_pct_1h gate_high, indicating fragile leveraged crowding) and taker buying pressure fades (taker_buy_ratio_1h gate_low, triggering the breakdown).",
+  "narrative": "In perpetual futures markets, basis dislocation represents the normalized spread between perpetual futures prices and underlying spot index prices: safe_div(futures_close - spot_close, spot_close + 1e-6, 0.0). When speculative leverage aggressively drives perpetual futures to trade at a substantial premium or discount relative to spot (|basis_zscore| > 1.5), cross-market basis arbitrageurs (cash-and-carry or reverse cash-and-carry traders) and funding rate penalties generate monetary incentives to restore price convergence. On the positive dislocation side (futures > spot), arbitrageurs short futures and buy spot, exerting downward price pressure on perpetual contracts (predicted_sign = -1). Symmetrically, on the negative dislocation side (futures < spot), futures prices mean-revert upwards. Conditioning on oi_change_pct_1h (gate_high) isolates episodes where leverage was aggressively deployed to build the dislocation, making the speculative crowd vulnerable to sudden de-leveraging. Conditioning on taker_buy_ratio_1h (gate_low) captures the exhaustion of aggressive buying flow, providing the precise trigger for mean-reversion to commence.",
+  "research_rationale": "Selected the least-covered recommended economic family BASIS (family load 16) with direction lab_basis_dislocation. The design directly answers the alpha cemetery for basis_dislocation, where 66% of prior deaths were evidential T0.04-IC-STAT kills caused by unconditional dense trading paying high friction. By locking a clean expression in expression_lab (|basis_zscore| > 1.5 and basis_dislocation != 0) with 15.0% panel match rate, projected T1 days reach 274 (well above the 250 threshold). We pair the anchor with two live-servable partners: oi_change_pct_1h (exposure role, gate_high, projected scored days 252) to identify fragile leveraged crowds, and taker_buy_ratio_1h (trigger role, gate_low, projected scored days 260) to time the onset of mean-reversion. Full search scope is chosen to allow Layer 2.5 to explore both the committed gated terms and their mutations across the 1h to 4h band while retaining anchor controls."
+}

@@ -1,0 +1,23 @@
+{
+  "hypothesis_id": "hyp_lab_liquidation_imbalance_30m_sign_1_XL_l1alt_15m_0_tbeac8da6",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 30-minute sell liquidation imbalances (liquidation_imbalance_30m > 0.70) coupled with resting order book bid support (depth_imbalance_10 > -0.05) on Layer 1 alternative assets identify transient mechanical forced selling exhaustion rather than informed directional price discovery. When long positions undergo compulsory market-order liquidation, market depth is temporarily displaced beyond fundamental clearing prices. Once the discrete burst of liquidating market sell flow clears, the persistence of resting bid depth and the exhaustion of aggressive taker selling trigger an upward mean-reversion over 30m to 4h horizons (predicted_sign = +1).",
+  "narrative": "1. Market Participants and Forced Selling Mechanism:\nIn crypto perpetual futures markets, leveraged long participants facing margin deficiency triggers automated, non-discretionary liquidation engines. These engines submit aggressive market sell orders regardless of price elasticity or market impact. This creates an exogenous supply shock concentrated in short temporal intervals.\n\n2. Price Impact and Exhaustion Dynamics:\nThe variable liquidation_imbalance_30m > 0.70 isolates episodes where long liquidations overwhelmingly dominate short liquidations over a rolling 30-minute window. However, pure liquidation volume can occasionally reflect broad panic cascades. By conditioning on resting bid depth depth_imbalance_10 > -0.05, we ensure that passive liquidity providers have maintained resting bid interest in the top 10 book levels rather than pulling quotes.\n\n3. Sign Chain and Predicted Direction:\n- Channel Sign = -1 (forced market selling exerts direct downward price pressure).\n- Anomaly Direction = +1 (the predicate isolates positive tail extremes of sell liquidation dominance).\n- Response Polarity = -1 (mean-reverting snapback following liquidity exhaustion).\n- Combined Predicted Sign = (-1) * (+1) * (-1) = +1 (Long / Upward return expectation).\n\n4. Conditioning and Composition:\nWe condition the signal using gate_low on taker_buy_ratio_1h (confirming that non-liquidation aggressive buying has dried up, marking climax exhaustion) and gate_high on spread_bps (identifying the momentary liquidity premium before spread normalization), allowing the alpha to selectively fire when execution edge is maximal.",
+  "research_rationale": "Dominant cemetery kill codes for lab_liquidation_imbalance_30m show that 706 of 874 historical trials failed at T0.04-IC-STAT. An autopsy of these failures reveals that raw liquidation imbalance exhibits high temporal noise and frequent regime contamination when tested as an unconditioned linear feature, particularly during sustained trend regimes where forced selling triggers further momentum.\n\nTo decisively address T0.04-IC-STAT, our design:\n1. Employs a non-linear locked predicate (XL_l1_alt_a4533aa9e703) requiring resting book depth (depth_imbalance_10 > -0.05) alongside the liquidation spike, filtering out unbuffered momentum cascades and isolating genuine liquidity exhaustion.\n2. Formulates a targeted composition plan:\n   - gate_low on taker_buy_ratio_1h: Aligns directly with the gene prior table for order flow exhaustion, firing only when aggressive retail/taker participation has ceased.\n   - gate_high on spread_bps: Exploits the transient liquidity vacuum and elevated bid-ask spread associated with liquidation bursts, entering when expected mean-reversion magnitude exceeds trading friction.\n3. Search scope is set to 'full' to rigorously benchmark the pre-registered composition against the automatic coupling grid under deflated Sharpe ratio penalties, ensuring that the detected edge is robust and not an artifact of sparse sample selection.\n4. Liquidation provenance is grounded on 2,813 observed-source events across the 416 active days in the lakehouse sample (match rate 4.09%), satisfying T1 sample size constraints and avoiding synthetic imputation artifacts."
+}

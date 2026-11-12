@@ -1,0 +1,20 @@
+{
+  "hypothesis_id": "hyp_lab_return_24h_btc_neutral_sign_-1_XL_majors_15m_0_te60c7e53",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Major altcoins (ETH, SOL, BNB, XRP) exhibiting extreme 24-hour idiosyncratic return residuals relative to Bitcoin (|return_24h_btc_neutral| > 0.025) undergo statistically significant mean reversion over subsequent 1-hour to 4-hour horizons. This mean reversion is intensified when aggressive taker order flow turns opposite to the dislocation (taker_buy_ratio_1h opposite side) and when resting limit order book depth provides absorption (depth_imbalance_10 opposite side).",
+  "narrative": "When an altcoin diverges sharply from its 21-day rolling OLS beta relationship with Bitcoin over a 24-hour window, the excess return reflects idiosyncratic speculative flow, localized retail chasing, or temporary liquidity imbalances rather than enduring fundamental revaluations. Market makers and cross-sectional arbitrageurs face inventory imbalances as price is pushed away from fair value. Over the subsequent 1 to 4 hours, aggressive taker flow exhausts: when taker buy ratio drops below neutral (for an upward dislocation) or rises above neutral (for a downward dislocation), the speculative momentum halts. Concurrently, resting limit order book depth on the opposite side absorbs residual market orders and forces an inventory rebalance, driving price back toward the BTC-neutral regression line. The effect is symmetric across positive and negative residuals, but is structurally stronger in ranging regimes where persistent trend momentum does not overwhelm inventory mean reversion.",
+  "research_rationale": "The locked candidate XL_majors_fdd4a58338fe isolates extreme 24h idiosyncratic returns (|return_24h_btc_neutral| > 0.025) across 37,326 bars (23.77% panel match rate, 389 independent active days across BNB, ETH, SOL, XRP; BTC serves as unscored reference). In inspect_catalog.cemetery, return_24h_btc_neutral suffered 1,089 kills at T0.04-IC-STAT primarily because unconditioned continuous variants trade densely every bar and suffer from low correlation at coarse horizons (12h/1d had 0% survival). Our design directly answers these dominant kill codes by: (1) focusing strictly on short horizons (1h to 4h) where 1h showed historical survival (2.4%), (2) converting the continuous signal into an event-driven condition via the locked predicate, and (3) adding order flow trigger and depth absorption gates that eliminate non-reverting bars. In gene_knowledge.priors, taker_buy_ratio_1h is the primary trigger (role: trigger, direction: opposite_side, n=60, confidence: sufficient, shrink_weight: 0.75). We commit gate_opposite_side as the primary trigger, along with gate_low and gate_high as essential controls to prevent side-tied confounding. Depth_imbalance_10 is committed as the absorption condition (role: absorption, direction: opposite_side) with its corresponding gate_low and gate_high controls. In probe_partner, both partners demonstrated 1.0 coverage, low anchor correlation (< 0.06), and qualified for all T1 projections (> 700 event observations at 60m). The evidence does not prove out-of-sample predictability before T1, and does not test regimes outside the 2024-2025 scan window."
+}

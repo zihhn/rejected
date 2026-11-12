@@ -1,0 +1,14 @@
+{
+  "hypothesis_id": "hyp_order_flow_imbalance_sign_-1_A8_SUIUSDT_1h_0_t7b317eef",
+  "exchange": "Bybit",
+  "symbol": "SUIUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme aggressive taker buy volume (taker_buy_ratio_1h > 0.58) in Layer 1 alternative cryptocurrencies, when occurring amidst crowded positive speculative carry (funding_rate_zscore_30d > 0.0) and hitting passive limit order book absorption (depth_imbalance_10 < 0.25), indicates acute buyer inventory exhaustion rather than genuine price discovery. As market makers absorb transient taker flows and aggressive demand depletes, subsequent inventory rebalancing induces systematic negative mean-reversion over 1h to 4h horizons.",
+  "narrative": "When retail or momentum participants aggressively buy through market orders (driving taker_buy_ratio_1h above 0.58), prices experience transient upward price pressure. However, in an environment where limit sell liquidity remains dense relative to bids (depth_imbalance_10 < 0.25), institutional liquidity providers and market makers absorb this aggressive flow into their short inventory without allowing sustained upward momentum. Concurrently, positive 30-day funding rate z-scores indicate an existing overhang of speculative long positioning that must pay perpetual carry. Once aggressive buying power is exhausted, the absence of marginal buyers leaves market makers with accumulated short inventory that they rebalance by lowering quotes, while over-leveraged long traders are forced to liquidate or cut positions into thinner bids. This inventory rebalancing and long de-leveraging produces reliable downward price drift over subsequent 1-hour to 4-hour windows.",
+  "research_rationale": "Order flow imbalance with negative predicted sign (-1) represents an unexploited orthogonal alpha vector in the l1_alt universe, where prior commitments have 0 entries for sign -1. Inspection of the anchor cemetery revealed that 70.9% of prior failures suffered from T0.04-IC-STAT due to evaluating unconditioned raw taker ratios in momentum regimes. By pre-registering candidate XLC_e7c529de2849 from expression_lab, we condition the signal on limit depth absorption (depth_imbalance_10 < 0.25) and speculative carry (funding_rate_zscore_30d > 0.0), achieving a 3.73x lift over raw scanner events and clearing the Layer 2.5 event observation floor with 4,531 projected T1 observations at 1h. This directly addresses the cemetery failure modes by distinguishing unabsorbed momentum breakouts from true liquidity absorption. We specify search_scope 'full' so the engine can test both the committed gate terms and standard canonical grid variants."
+}

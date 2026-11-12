@@ -1,0 +1,23 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_raw_sign_-1_XL_alttheme_15m_0_t5431af81",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "In altcoin perpetual futures (alt_theme basket), when funding rate (funding_rate_raw) is heavily positive (> 0.00015 per settlement period, exceeding the 90th percentile), long positions bear substantial continuous carry costs. When aggressive taker selling emerges (taker_buy_ratio_1h gate_low) or order book depth thins out on bids (depth_imbalance_10 gate_low), overleveraged long positions face exhaustion and forced de-leveraging. This triggers a systematic downward price reversal (predicted_sign = -1) over 1h to 4h horizons.",
+  "narrative": "Perpetual futures markets exhibit persistent carry trade crowding during bullish sentiment episodes. When the per-period funding rate reaches extreme positive levels (funding_rate_raw > 0.00015, or > 1.5 bps per 8-hour period), long traders are paying substantial recurring fees to short counter-parties. This carry cost erodes the holding margin of leveraged accounts. As long as retail momentum continues buying, the carry imbalance can persist; however, the moment aggressive selling pressure is initiated by takers (captured by taker_buy_ratio_1h < 1.5 sigma below mean) or resting bid liquidity thins out (depth_imbalance_10 < 1.5 sigma), long accounts can no longer sustain their leveraged carry. Profit-taking and stop-loss unwinds cascade into market orders, overwhelming resting liquidity. Because the underlying anchor signal represents a crowded long position experiencing carry exhaustion, the resulting response polarity is an exhaustion reversal (-1), producing a negative forward price return (predicted_sign = -1). Supporting conditions on open interest flow (oi_change_pct_4h) and depth imbalance (depth_imbalance_10) verify that the mechanism activates specifically when positioning is stretched and market absorption capacity is impaired.",
+  "research_rationale": "The locked candidate XL_alt_theme_63d2be4ae224 isolates periods where funding_rate_raw exceeds 0.00015 (above p90 of 0.00010 and approaching p95 of 0.000198 on alt_theme), occurring on 19,232 bars across 46 independent event days and 105 distinct episodes. All 8 basket members match with balanced coverage (1,696 to 3,712 bars each). According to inspect_catalog cemetery records for lab_funding_rate_raw (279 trials, dominant kill code T0.04-IC-STAT at 239 trials), raw continuous funding signals die at T0 because funding is carried forward flat over 8-hour intervals, diluting continuous IC. Our design directly addresses this dominant kill code by conditioning on extreme tail funding (> 0.00015) combined with event-gated triggers. Composition partner taker_buy_ratio_1h (gate_low) follows the gene prior for carry_unwind (role: trigger, direction: opposite_side, n=36, confidence: sufficient), where crowded longs unwind as takers turn aggressive sellers. Partner oi_change_pct_4h (gate_tail) follows the exposure role (n=18, confidence: insufficient_data), confirming that leverage has undergone abnormal expansion or contraction. Partner depth_imbalance_10 (gate_low) captures resting liquidity depletion on the bid side, ensuring that selling pressure cannot be absorbed passively without price slippage. What the evidence does not show: the scan panel cannot establish whether funding unwinds are driven by idiosyncratic altcoin factors or market-wide Bitcoin macro liquidations; this will be tested out of sample in Layer 2.5."
+}

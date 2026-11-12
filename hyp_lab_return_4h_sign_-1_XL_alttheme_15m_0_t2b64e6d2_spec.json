@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_return_4h_sign_-1_XL_alttheme_15m_0_t2b64e6d2",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 4-hour return displacements (|return_4h| > 2.5%) in alt_theme perpetual contracts systematically experience price mean reversion over 30m to 4h forward horizons. When price extends rapidly over a 4-hour window, transient liquidity demand creates temporary price overshooting; as aggressive taker flow exhausts and resting order book depth absorbs the imbalance, price reverts toward equilibrium. Conditioning on extreme taker flow (taker_buy_ratio_1h) and book depth imbalance (depth_imbalance_10) filters out fundamental trend breakouts and isolates pure liquidity exhaustion reversals.",
+  "narrative": "In cryptocurrency perpetual futures markets, particularly among alternative tokens in the alt_theme basket, aggressive momentum chasing frequently leads to transient overextension. When a contract experiences a substantial 4-hour return movement exceeding 2.5% in either direction (|return_4h| > 0.025), market participants frequently push price beyond short-term fair value due to localized order imbalances and algorithmic trend-following pressure. However, absent continuous aggressive taker replenishment, the price trajectory reaches an exhaustion point. The resting liquidity providers on the opposite side of the book gradually absorb the remaining flow, and mean reversion ensues over intermediate horizons between 30 minutes and 4 hours. By pairing the 4-hour return displacement with order flow imbalance (taker_buy_ratio_1h) and 10-level book depth imbalance (depth_imbalance_10), we isolate conditions where the move is unsupported by persistent order flow. On the positive side of return_4h, the price overshoots upward and reverts downward (predicted forward price direction -1); on the negative side, the price overshoots downward and reverts upward (predicted forward price direction +1). Thus, the signed relationship between return_4h and subsequent forward return is negative, establishing predicted_sign = -1.",
+  "research_rationale": "We selected lab_return_4h from the recommended directions (Rank 5, PRICE family, 0 prior commitments, direction load 0, base gene anchor load 0). Profiling on alt_theme shows 4h return has a standard deviation of 2.04%, with p05/p95 at -3.31%/+3.41%. Autocorrelation drops sharply from 0.9318 at 1 bar to 0.0089 at 4h and -0.0430 at 1d, verifying that 4h return shocks do not suffer from long-memory persistence or stale states. The locked predicate abs(return_4h) > 0.025 captures 58,405 matched rows across 430 active days (430 independent events), with an even positive/negative balance (29,820 positive vs 28,585 negative), satisfying sign_basis gene_relation for predicted_sign = -1. T1 scoring projects 264 scored days against the 250-day floor (scored on 404 of 430 scan days), comfortably clearing the observation floor. Cemetery inspection shows return_4h is completely untested in Layer 2.5 (trials = 0). Partner probes confirm 100% panel coverage for taker_buy_ratio_1h and depth_imbalance_10, with gate_tail projected at 280 active days and 269-273 scored days, satisfying T1 minimum day requirements. Full search scope is selected to allow the automatic grid to explore interaction and sided gates across flow and book depth dimensions."
+}

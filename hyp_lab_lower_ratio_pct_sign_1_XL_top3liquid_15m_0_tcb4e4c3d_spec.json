@@ -1,0 +1,18 @@
+{
+  "hypothesis_id": "hyp_lab_lower_ratio_pct_sign_1_XL_top3liquid_15m_0_tcb4e4c3d",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme lower shadow ratio (lower_ratio_pct > 0.70) formed during 1-hour downward price excursions (return_1h < 0) reflects structural liquidity absorption where aggressive sell flow is exhausted against resting limit bids. This rejection of lower prices leads to positive forward price continuation over the 1h to 4h horizon as trapped sellers cover and buyers re-enter.",
+  "narrative": "During an intra-hour sell-off (return_1h < 0), aggressive market participants including liquidation cascades, stop-loss runners, and momentum sellers submit market sell orders that aggressively drive prices down to test recent support levels. At these lower price points, aggressive sell flow exhausts immediate book depth and encounters passive limit bids and dip-buyers who absorb the supply. As the limit bids absorb the selling pressure, the market order exhaustion allows liquidity makers and dip-buyers to re-bid higher, forcing price back up towards the bar's open before the 15-minute candle closes. This leaves an elongated lower wick (lower_ratio_pct > 0.70). In the subsequent 1h to 4h horizon, trapped aggressive short sellers who failed to achieve breakdown are forced to cover, while momentum buyers enter on the confirmed support rejection, driving a positive rebound continuation (predicted_sign = 1).",
+  "research_rationale": "The anchor signal XL_top3_liquid_2f3e8672c6ee pools observations across top3_liquid (BTC, ETH, SOL) on 15m bars, capturing 10,440 matched bars (8.43% match rate) across 430 active days, with 9,082 distinct episodes and an effective sample size of N=430 independent daily episodes. In expression_lab, t1_scoring certifies 418 scored days on the scan panel, projecting 273 scored days in the 281-day T1 window (reaches_t1_floor: true). Lower_ratio_pct has mean 0.382, std 0.279, p50 0.339, p90 0.807, and near-zero autocorrelation (1bar: -0.002, 1d: 0.002), confirming episodic liquidity shocks. The cemetery reports 0 previous trials for lower_ratio_pct (untested). The design couples lower_ratio_pct with return_1h < 0 to ensure the lower wick isolates genuine recovery from a price dip rather than chop, answering potential T0.04-IC-STAT dilution. Probed partners volume_ratio_1h (gate_high, 253 projected scored T1 days) and taker_buy_ratio_1h (gate_low, 252 projected scored T1 days) confirm that the absorption occurs on high volume against heavy taker selling. What the evidence does NOT show: in-sample frequency does not guarantee positive forward return, and basket-wide co-occurrence (44.8% shared bars) means market-wide factors contribute to event timing."
+}

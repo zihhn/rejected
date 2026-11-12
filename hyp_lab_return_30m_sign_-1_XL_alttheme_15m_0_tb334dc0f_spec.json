@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_return_30m_sign_-1_XL_alttheme_15m_0_tb334dc0f",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "In altcoin perpetual futures (alt_theme), sharp 30-minute return shocks (|return_30m| > 0.82%) accompanied by volume surges (volume_surge > 0.408) represent climactic liquidity depletion and aggressive order flow overextension rather than permanent fundamental price discovery. Consequently, forward excess returns over 30m to 4h horizons will exhibit systematic mean reversion (predicted_sign = -1 on the positive tail, mirrored on the negative tail), particularly when conditioned on extreme taker imbalances, widened bid-ask spreads, and order book depth imbalances.",
+  "narrative": "When market participants aggressively execute market orders across altcoin perps over a short 30-minute window, top-of-book and resting depth liquidity is rapidly consumed. This creates substantial temporary market impact, driving prices temporarily away from fundamental equilibrium. In the aftermath of such climactic surges, aggressive taker volume dries up while passive liquidity providers, automated market makers, and statistical arbitrageurs lean against the inventory imbalance, quoting wider spreads and re-accumulating inventory at discounted prices. As the temporary impact dissipates and the order book is replenished, price mean-reverts toward the pre-shock baseline over the subsequent 30-minute to 4-hour horizons. Conditioning on taker buy ratio tails isolates bars where aggressive flow was extreme, conditioning on spread tails isolates moments of severe liquidity withdrawal where temporary impact was maximized, and conditioning on depth imbalance isolates resting quote asymmetry that facilitates post-shock price reversion.",
+  "research_rationale": "The candidate was pre-registered under the lab route for lab_return_30m on the alt_theme scan preset (LINK, FIL, UNIUSDT, AAVE, ARB, OP, DOGE, 1000PEPE) at 15m cadence. The locked predicate (abs(return_30m) > 0.0082 and volume_surge > 0.408) identified 29,795 matched rows (9.02% panel share) across 18,622 episodes and 429 active days, demonstrating a lift of 2.26 over independent occurrence and zero coupling between return shock and volume surge. In expression_lab, the predicate projected 263 scored days into Layer 2.5's T1 evaluation window, successfully exceeding the 250-day observation floor (reaches_t1_floor: true). Cemetery inspection reveals that lab_return_30m has 0 prior trials and is completely untested in Layer 2.5. Partner probing on alt_theme confirmed 100% valid coverage for taker_buy_ratio_1h, spread_bps, and depth_imbalance_10, all of which are live-servable and exhibit sufficient projected event observations (>350 events across horizons) to clear T1 event thresholds. We employ search_scope 'full' to test core anchor templates alongside the three gated conditioning terms and their automated grid permutations."
+}

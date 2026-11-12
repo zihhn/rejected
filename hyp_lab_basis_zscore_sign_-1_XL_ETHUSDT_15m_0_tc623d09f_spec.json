@@ -1,0 +1,12 @@
+{
+  "hypothesis_id": "hyp_lab_basis_zscore_sign_-1_XL_ETHUSDT_15m_0_tc623d09f",
+  "exchange": "Bybit",
+  "symbol": "ETHUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h"
+  ],
+  "hypothesis_text": "Extreme positive futures-spot basis dislocation (basis_zscore > 1.5) triggers mean-reverting arbitrage pressure as cash-and-carry market participants short perpetual futures and buy spot, inducing a negative price drift over the forward 1-hour horizon, especially when speculative leverage is exhausted (high OI) and orderbook depth provides execution liquidity.",
+  "narrative": "Futures-to-spot basis reflects the premium or discount of perpetual contracts against spot market prices. When basis_zscore exceeds 1.5 standard deviations over a 24-hour baseline, perpetual futures trade at an anomalous premium. This spread opens profitable cash-and-carry arbitrage opportunities where institutional traders short perpetual futures while purchasing spot assets to lock in basis yields. As arbitrage capital enters, selling pressure on perpetual futures forces the basis to compress toward its fair value equilibrium. Conditioning on elevated open interest (oi_zscore_24h > 1.5) isolates regimes where speculative long positioning is already stretched to capacity and vulnerable to exhaustion. Concurrently, conditioning on deep orderbook bids (depth_imbalance_10 > 1.5) ensures that arbitrage sales encounter sufficient resting bid liquidity, producing an orderly yet persistent downward drift in perpetual prices.",
+  "research_rationale": "The BASIS economic family represents one of the least explored and lowest-loaded families in the research catalog (load 16). While historical trials suffered from T0 IC-STAT kills on coarse horizons, cemetery analysis reveals that the 1-hour horizon achieved the highest in-sample survival rate (11.6%). By locking an explicit expression (basis_zscore > 1.5) on ETHUSDT with over 400 independent events, and conditioning on open interest leverage exhaustion (oi_zscore_24h) and top-10 book depth imbalance (depth_imbalance_10), this design addresses past failure modes by focusing on high-conviction liquidity-backed arbitrage windows rather than unconstrained noise."
+}

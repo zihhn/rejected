@@ -1,0 +1,14 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_7d_sign_-1_XL_AVAXUSDT_15m_0_t8ee024dc",
+  "exchange": "Bybit",
+  "symbol": "AVAXUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 7-day standardized funding rate z-scores (|funding_rate_zscore_7d| > 1.5) indicate crowded positioning and carry fatigue on L1 altcoins, predicting a forward price mean-reversion over 1h to 4h horizons as unsustainable financing costs force position unwinds.",
+  "narrative": "In cryptocurrency perpetual futures, the 7-day standardized funding rate z-score (funding_rate_zscore_7d) captures medium-term carry imbalances where one side of the market pays substantial cumulative financing premiums. When funding reaches statistical extremes (|z| > 1.5), market participants face acute carry exhaustion. Speculators holding the crowded side (longs when z > 1.5, shorts when z < -1.5) experience persistent margin decay. If aggressive price momentum fails to deliver immediate profits, the capital cost of maintaining open exposure triggers inventory unwinds and stop cascades. The unwind is triggered when taker flow begins leaning in the opposite direction (taker_buy_ratio_1h gate), and is intensified when open interest has recently expanded (oi_change_pct_4h gate), demonstrating that fragile leveraged capital is trapped. When order book depth on the absorbing side thins out (depth_imbalance_10 gate), these unwinds generate predictable mean-reversion returns over 1h to 4h execution horizons.",
+  "research_rationale": "The anchor candidate XL_AVAXUSDT_e6caa791ff89 was locked in expression_lab on the condition abs(funding_rate_zscore_7d) > 1.5. On the scan panel (2024-06 to 2025-08), this condition fires on 38,955 rows (13.7% of panel) across 337 active days and 868 independent episodes, comfortably clearing the 30 independent events threshold. In T1 projection, event observations reach 3,733 at 1h and 1,134 at 4h, well above the 250 T1 floor. Review of cemetery records indicates that 579 prior trials died at T0.04-IC-STAT due to unconditioned, continuous linear scoring of funding rates; our design addresses this dominant kill code by applying a discrete statistical barrier (|z| > 1.5) that isolates genuine carry stress events. Furthermore, gene_knowledge priors recommend taker_buy_ratio_1h as an opposite-side trigger and oi_change_pct_4h as a leverage exposure gate. Probed coverage for all partner columns is 100% with projected scored days between 271 and 274, guaranteeing adequate representation in the T1 window. Full search scope is selected to allow the automated composition mutator to explore multi-gene interaction surfaces alongside pre-registered gates."
+}

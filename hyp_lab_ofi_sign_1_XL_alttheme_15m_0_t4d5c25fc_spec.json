@@ -1,0 +1,23 @@
+{
+  "hypothesis_id": "hyp_lab_ofi_sign_1_XL_alttheme_15m_0_t4d5c25fc",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h"
+  ],
+  "hypothesis_text": "Persistent positive order flow imbalance (roll_z(ofi, 24) > 1.2) reflects aggressive net buyer pressure at the top of the orderbook that drives short-term price continuation across alt_theme perpetual futures over 30m to 2h horizons, strengthened when confirmed by aggressive taker buy flow (gate_high on taker_buy_ratio_1h) and in thin book conditions (gate_high on spread_bps).",
+  "narrative": "Order Flow Imbalance (OFI) measures the net supply/demand shifts at the top of the order book by accumulating order additions, cancellations, and executions across discrete intervals (Cont, Kukanov & Stoikov 2014). When OFI exhibits a strong positive excursion relative to its rolling 24-bar baseline (roll_z(ofi, 24) > 1.2), it signals sustained accumulation where bids aggressively replenish while asks are rapidly depleted or cancelled. In altcoin perpetual contracts with fragmented liquidity, this microstructural pressure forces passive market makers to mark prices upward to avoid adverse selection. However, quotes alone can be fleeting or spoofed; therefore, conditioning on aggressive taker buyer volume (gate_high on taker_buy_ratio_1h) filters out phantom orderbook depth and confirms real institutional trade arrival. Furthermore, when the bid-ask spread is elevated (gate_high on spread_bps), liquidity is thinner, multiplying the price impact of each unit of net order flow. Consequently, positive OFI under aggressive taker participation generates persistent directional drift that continues over the subsequent 30m to 2h horizon rather than immediately reverting.",
+  "research_rationale": "The anchor XL_alt_theme_6491f58e2ede locks the condition roll_z(ofi, 24) > 1.2 across all 8 alt_theme perps. The scan panel exhibits 34,939 matched bars (10.59% match rate) spanning 430 active days and 420 T1-scoreable days, yielding 274 projected T1 days (well above the 250-day floor). On 99.994% of firing bars, OFI is positive (34,937 positive vs 2 negative), establishing an unambiguous positive relation between OFI and forward returns (predicted_sign = 1). Autocorrelation of roll_z(ofi, 24) at 1 bar is 0.047 and at 1 day is 0.001, proving that episodes represent genuinely independent microstructural shocks. Regarding composition partners: gene_knowledge priors identify taker_buy_ratio_1h as the primary trigger partner (sufficient evidence, n=36, shrink_weight=0.643, gate_high_days=429) to separate informed book flow from fleeting phantom depth, and spread_bps as the absorption partner (sufficient evidence, n=48, shrink_weight=0.706, gate_high_days=429) to condition on thin book environments. In the alpha cemetery for ofi (456 trials, 11 survived), the dominant kill code was T0.04-IC-STAT (336 trials) on dense single/gate_tail formulas, whereas spread combinations with spread_bps achieved a 0.095 survival rate (top kill code T1.20-REGIME-FILTER) and taker_buy_ratio_1h achieved 0.083 survival. Our design directly addresses T0.04-IC-STAT by pre-registering an explicit rolling z-score event filter (roll_z > 1.2) that isolates large directional orderbook imbalances and pairing it with taker confirmation, while conditional_prediction (stronger_in: trending, weaker_in: ranging) addresses T1.20-REGIME-FILTER by formalizing the market state dependency without prematurely pruning the cross-section."
+}

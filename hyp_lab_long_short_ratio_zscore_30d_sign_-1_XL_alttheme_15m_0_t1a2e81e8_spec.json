@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_long_short_ratio_zscore_30d_sign_-1_XL_alttheme_15m_0_t1a2e81e8",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h",
+    "12h"
+  ],
+  "hypothesis_text": "When retail trader sentiment measured by the 30-day z-score of the account long/short ratio reaches an extreme (|z| > 1.5), positions become overextended and vulnerable to institutional counter-trading and liquidation cascades. We hypothesize that forward returns will systematically revert against the crowded retail side (predicted_sign = -1), with the effect sharpened when opposite-side aggressive taker flow begins to trigger the unwind and when resting depth is insufficient to absorb the rebalance.",
+  "narrative": "In crypto perpetual futures, the long/short account ratio reflects retail positioning distribution across market participants. When retail accounts become heavily skewed to one side (top or bottom deciles of the rolling 30-day distribution, |z| > 1.5), market makers and institutional participants hold the opposite inventory. As retail buying or selling power exhausts, aggressive taker flow moving in the opposite direction (measured by taker_buy_ratio_1h) triggers an inventory rebalancing cascade. Retail traders who entered late at extreme prices are forced to close or suffer liquidation, amplifying the mean-reverting price move. Conditioning on trend_sma_ratio_24h ensures that the reversal is distinguished from pure continuous trend momentum, while depth_imbalance_10 identifies periods where resting order book liquidity cannot absorb the aggressive unwind.",
+  "research_rationale": "Locked candidate XL_alt_theme_c217f4f39267 captures 66,021 matched rows (21.49% match rate, 396 active days, 396 independent events) across all 8 alt_theme symbols. Family dispersion: mean 0.02, std 1.24, p05=-1.74, p95=2.22, 1d autocorrelation 0.705. The scan panel is exploratory and frequencies do not guarantee edge; T1 is the true test. Gene selection: taker_buy_ratio_1h follows the prior (trigger, opposite_side, n=123, confidence sufficient), committed as gate_opposite_side with mandatory gate_high and gate_low controls. trend_sma_ratio_24h follows prior (stretch control, gate_tail, n=48, confidence sufficient). depth_imbalance_10 provides resting book absorption (gate_tail, 280 projected days). funding_rate_zscore_30d was probed but excluded from gates because its gate projected only 31-143 days, missing the 250-day floor. Answering cemetery: top kill codes on long_short_ratio_zscore_30d are T0.04-IC-STAT (1630) and T1.10-ICIR (99). Historical surviving trials were concentrated in 1h-2h horizons paired with taker_buy_ratio_1h (survival rate 5%). Our design answers T0.04 by conditioning on opposite taker flow and focusing on the [1h, 12h] persistence horizon band."
+}

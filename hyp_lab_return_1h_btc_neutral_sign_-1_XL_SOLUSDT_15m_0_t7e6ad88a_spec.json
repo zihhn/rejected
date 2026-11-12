@@ -1,0 +1,15 @@
+{
+  "hypothesis_id": "hyp_lab_return_1h_btc_neutral_sign_-1_XL_SOLUSDT_15m_0_t7e6ad88a",
+  "exchange": "Bybit",
+  "symbol": "SOLUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme idiosyncratic 1-hour return shocks in altcoins relative to Bitcoin (return_1h_btc_neutral) revert over 30m to 4h horizons (predicted_sign = -1), with stronger reversion when conditioned on taker flow exhaustion (taker_buy_ratio_1h) and resting order book depth support (depth_imbalance_10).",
+  "narrative": "When an altcoin (SOL, ETH) experiences a sharp idiosyncratic return deviation relative to Bitcoin over a 1-hour window (return_1h_btc_neutral), the price move represents asset-specific flow decoupled from general market beta. In crypto markets, such moves frequently stem from aggressive taker market orders, localized forced liquidations, or speculative chasing. Liquidity providers and cross-asset arbitrageurs initially widen quotes during the aggression. Once the aggressive taker buying or selling reaches exhaustion—identified when taker_buy_ratio_1h normalizes or leans opposite, and when resting limit order depth (depth_imbalance_10) provides passive absorption—the pressure abates. Arbitrageurs restore relative pricing against BTC, causing the idiosyncratic return shock to revert over subsequent 30-minute to 4-hour horizons. Reversal occurs because fundamental value drivers did not shift market-wide; the dislocation was purely driven by transitory liquidity demand.",
+  "research_rationale": "The anchor candidate XL_SOLUSDT_dd489e55b91b captures extreme 1-hour return shocks decoupled from BTC (return_1h_btc_neutral with absolute value > 0.005), matching 10,959 bars on SOLUSDT across 409 active days and 409 independent events, perfectly balanced across positive (8,414) and negative (8,521) shocks. Autocorrelation of return_1h_btc_neutral drops sharply from 0.72 at 1 bar to -0.027 at 1 hour, supporting immediate mean reversion rather than persistence. Analysis of the alpha cemetery for return_1h_btc_neutral reveals 825 trials with 59 surviving T1 (7.2% survival rate). The dominant historical failure mode was T0.04-IC-STAT (557 trials) and T1.10-ICIR (121 trials), heavily concentrated in unconditioned dense formulas trading every bar and paying high turnover costs. Conditioning via gate terms (gate_low and gate_high on taker_buy_ratio_1h, gate_tail on depth_imbalance_10) directly addresses this failure mode by converting dense signals into sparse event-driven signals that fire only during confirmed flow/depth states. In gene_knowledge priors, taker_buy_ratio_1h is the primary established trigger for cross-sectional rotation (60 ledger trials, sufficient confidence, shrink weight 0.75), where flow opposing the anchor confirms reversal. Depth_imbalance_10 provides the structural absorption role. Both partner columns have 1.0 panel coverage and clear all T1 projected observation thresholds (projected_days 280-281 >= 250). Search scope full is selected to explore both committed gate combinations and grid interactions."
+}

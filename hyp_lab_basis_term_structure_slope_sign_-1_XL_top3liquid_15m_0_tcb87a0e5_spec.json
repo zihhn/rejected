@@ -1,0 +1,17 @@
+{
+  "hypothesis_id": "hyp_lab_basis_term_structure_slope_sign_-1_XL_top3liquid_15m_0_tcb87a0e5",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h"
+  ],
+  "hypothesis_text": "When the basis term structure exhibits significant steepening (8h vs 24h z-score dislocation exceeding 1.5 sigma), spot prices experience mean reversion leading to negative forward excess returns over 30m to 1h horizons across liquid perpetuals.",
+  "narrative": "The perpetual-spot basis reflects market leverage, carrying cost, and immediate liquidity premia. A steepening term structure—captured by basis_term_structure_slope = safe_div(zscore(basis, '8h') - zscore(basis, '24h'), abs(zscore(basis, '24h')) + 1e-6) exceeding 1.5—identifies transient structural dislocations where short-horizon basis spikes sharply relative to medium-term basis. In liquid markets (BTC, ETH, SOL), rapid basis expansion is typically driven by aggressive leveraged positioning and taker flow rather than persistent fundamental yield shifts. As arbitrageurs step in and funding pressure mounts, basis mean-reverts, creating downward pressure on spot and perpetual prices over 30m to 1h horizons. Combining basis slope with order flow (taker_buy_ratio_1h) and book liquidity (depth_imbalance_10, spread_bps) conditions isolates moments where aggressive taker buying coincides with thin counter-liquidity, amplifying post-exhaustion reversal.",
+  "research_rationale": "We target basis_term_structure_slope under plan_df7616ea6c620b90aec7, an under-explored direction from the engine's recommended directions catalog (priority rank 2). Cemetery evidence indicates high kill rates at 2h/4h horizons due to low decay half-life, but strong persistence at short horizons (30m to 1h), with spread and gate combinations yielding highest survival (7.7% with taker_buy_ratio_1h). The candidate XL_top3_liquid_98f558661396 achieves 383 scored days on a 15m evaluation grid, comfortably clearing the T1 250-day floor. We include composition terms: spread with taker_buy_ratio_1h (capitalizing on cemetery survival prior), gate_same_side with taker_buy_ratio_1h (filtering for aggressive taker flow confirmation), and spread with depth_imbalance_10. We select search_scope 'full' to allow the Layer 2.5 grid to thoroughly explore linear and gated interactions while accounting for multi-testing deflation."
+}

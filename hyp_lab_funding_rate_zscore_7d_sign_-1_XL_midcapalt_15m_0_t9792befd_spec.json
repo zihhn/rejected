@@ -1,0 +1,19 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_7d_sign_-1_XL_midcapalt_15m_0_t9792befd",
+  "exchange": "Bybit",
+  "symbol": [
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h",
+    "12h"
+  ],
+  "hypothesis_text": "Persistent 7-day funding rate dislocations (|funding_rate_zscore_7d| > 1.2) in midcap perpetual futures (SOL, BNB, XRP) identify extreme leveraged positioning imbalances where carry cost becomes punitive. When aggressive taker order flow trades against the carry (gate_opposite_side on taker_buy_ratio_1h) or when open interest expansion signals overleveraged accumulation (gate_high on oi_change_pct_4h), marginal liquidity exhausts and forced position unwinds drive directional price mean-reversion over 1h to 12h horizons.",
+  "narrative": "Perpetual futures contracts anchor to spot prices through regular funding rate payments between longs and shorts. When funding rates remain persistently elevated or depressed relative to their trailing 7-day history (|funding_rate_zscore_7d| > 1.2), the market enters an asymmetric leverage regime. In positive funding regimes, leveraged longs pay continuous carry fees to short arbitrageurs, requiring sustained price appreciation to justify carrying costs. When momentum stalls, aggressive sellers (captured by gate_opposite_side on taker_buy_ratio_1h) initiate market sell orders that trigger stop losses and cascading liquidations among over-leveraged longs. Symmetrically, when funding rates are deeply negative, shorts pay longs, leaving crowded shorts highly vulnerable to aggressive taker buy surges. The presence of rapid open interest buildup (gate_high on oi_change_pct_4h) further amplifies this vulnerability by confirming that speculative leverage has recently expanded, increasing the total inventory that must be liquidated. This creates a predictable mean-reverting price drift over 1h to 12h horizons as inventory rebalances.",
+  "research_rationale": "The anchor gene funding_rate_zscore_7d was evaluated on the midcap_alt basket (SOL, BNB, XRP) over 123,840 bars (June 2024 to August 2025). Locking the expression abs(funding_rate_zscore_7d) > 1.2 produced candidate XL_midcap_alt_369ab92c37e0 with 26,197 matched bars (21.5% coverage), 515 episodes, and 324 independent events spanning 324 active days across all 15 months, clearing the 30-event minimum. Projected T1 event observations (3,108 at 60m, 1,799 at 120m, 950 at 240m) substantially exceed T1.11's 250-observation floor. What the evidence does not show: panel metrics reflect in-sample frequency and dispersion rather than realized forward edge; Bybit funding settlement occurs 8-hourly, so 15m observations inherit step-wise updates. Partner prior alignment: (1) taker_buy_ratio_1h as gate_opposite_side directly aligns with gene_knowledge.priors (role: trigger, opposite_side, n=36, sufficient confidence). Sided controls gate_low and gate_high on taker_buy_ratio_1h are committed alongside it to isolate the directional trigger from unconditional taker pressure; (2) oi_change_pct_4h as gate_high aligns with gene_knowledge.priors (role: exposure, high, n=18). Cemetery analysis: Out of 689 evidential kills on funding_rate_zscore_7d, 579 occurred at T0.04-IC-STAT due to evaluating continuous funding across uncrowded bars (|z| < 1.0) where carry pressure is negligible. The design addresses this dominant kill code by locking an expression_gate threshold (|z| > 1.2) that isolates severe carry dislocation, conditioning on taker flow triggers, and focusing on the 1h-4h horizon band where past Feature Vault T1 passes were concentrated (1.8% survival at 1h vs 0% at 30m and 4h). Search scope is set to full to allow automatic grid exploration across the specified genes while preserving pre-registered seeds."
+}

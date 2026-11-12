@@ -1,0 +1,20 @@
+{
+  "hypothesis_id": "hyp_lab_basis_annualized_sign_-1_XL_majors_15m_0_tddc839eb",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "When crypto perpetual futures trade at an extreme annualized premium to spot (basis_annualized > 2.0% on majors), speculative bullish leverage is overextended. As cash-and-carry arbitrageurs sell perps against spot and order book depth weakens on the bid side (depth_imbalance_10 < -1.5 sigma) or aggressive taker buying subsides (taker_buy_ratio_1h < -1.5 sigma), perpetual futures prices undergo mean reversion over 1h-to-4h horizons (predicted_sign = -1).",
+  "narrative": "Who has to transact and why: When perpetual futures trade at a substantial annualized premium over spot (positive basis dislocation exceeding 2%), market makers and basis arbitrageurs are incentivized to short perps and buy spot to capture the basis yield and funding payments. Concurrently, highly leveraged long speculators who drove perps to a premium face continuous carry costs and exhaustion of marginal buying power. When order book support deteriorates (depth_imbalance_10 skewing toward asks, indicating a withdrawal of passive bids), or when aggressive taker buying falters (taker_buy_ratio_1h dropping below 1.5 sigma), the order book lacks sufficient bid depth to absorb basis arbitrage selling and long unwinds. This forces a sharp downward price adjustment and basis compression across 1h, 2h, and 4h horizons.",
+  "research_rationale": "The anchor XL_majors_6ae9b32c6a8d locks basis_annualized > 2.0 across the majors basket (BTC, ETH, BNB, SOL, XRP) with 23,932 matched bars (11.59% match rate), 1,431 episodes, and 134 pooled independent events (each member has between 66 and 107 independent events, far exceeding the 30-event floor). In the alpha cemetery, basis_annualized has 1,271 previous trials with 80 T1 in-sample survivals (6.3% survival rate), with dominant kill codes being T0.04-IC-STAT (858 trials) and T1.10-ICIR (134 trials). Notably, survival rates peak at the 1h horizon (13.2% vs 4.6% at 2h and 0.5% at 4h) and under ratio/gated structures (ratio: 16.9%, depth_imbalance_10 ratio: 20.0%). The design directly addresses T0.04 and T1.10 kill codes by avoiding dense continuous trading and instead conditioning on liquidity exhaustion gates (depth_imbalance_10 gate_low with 381 projected T1 observations, and taker_buy_ratio_1h gate_low with 314 projected observations), ensuring trades occur only when bid liquidity is thin. Full search scope is chosen to enable the automatic grid to explore compositional variants across basis, order book, and taker flow while maintaining rigorous DSR trial deflation."
+}

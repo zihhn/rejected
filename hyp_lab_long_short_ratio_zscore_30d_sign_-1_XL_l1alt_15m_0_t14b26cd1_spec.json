@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "hyp_lab_long_short_ratio_zscore_30d_sign_-1_XL_l1alt_15m_0_t14b26cd1",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme retail long positioning on Layer-1 altcoins (long_short_ratio_zscore_30d > 1.5) combined with net aggressive selling (taker_buy_ratio_1h < 0.49) triggers systematic inventory exhaustion and cascading liquidations, predicting negative price returns (predicted_sign = -1) over 1h to 4h horizons.",
+  "narrative": "Retail positioning in crypto perpetual futures exhibits pronounced herd behavior and disposition effects. Over trailing 30-day windows, retail account long/short ratios become severely stretched when retail traders accumulate speculative long positions during price rallies or consolidation. When long_short_ratio_zscore_30d exceeds +1.5 standard deviations, retail inventory is highly concentrated on the long side. As retail buying power saturates, liquidity providers and institutional market makers widen spreads and lower resting bid depth (depth_imbalance_10 < -1.5). Aggressive sellers and informed short flow initiate selling pressure (taker_buy_ratio_1h < 0.49), hitting resting bids. Because retail long positions are levered and lack institutional replenishment, initial price declines trigger stop-losses and margin liquidation cascades. This creates a systematic, multi-hour inventory unwind and mean reversion (exhaustion reversal), resulting in predictable negative forward returns over 1h to 4h holding periods.",
+  "research_rationale": "The anchor candidate XL_l1_alt_0aafc6e10f5d pools 19,516 matched bars across all 7 members of l1_alt (ADA, AVAX, DOT, LTC, NEAR, SUI, TRX), spanning 261 active days and 4,780 episodes with 261 independent event days. Data coverage across the panel is 0.966. In expression_lab evaluation, long_short_ratio_zscore_30d sits strictly on the positive side (positive: 19516, negative: 0), while taker_buy_ratio_1h is strictly below center (negative: 19506), confirming that retail crowd is net long while aggressive order flow has flipped to net selling.\nIn inspect_catalog cemetery analysis, the anchor long_short_ratio_zscore_30d had 1,824 historical trials with 1,821 evidential kills, dominated by T0.04-IC-STAT (1,630 kills). This occurred because unconditioned, dense formulas trade on every bar and suffer from low signal-to-noise ratio. The three surviving historical trials in the cemetery were residual_hedge variants partnered with taker_buy_ratio_1h (survival rate 5.0%), demonstrating that conditioning on aggressive taker order flow is essential to isolating genuine unwinds.\nTo directly address this dominant kill mode, our design uses:\n1. An authored trigger condition in expression_gate (taker_buy_ratio_1h < 0.49) and an explicit composition term gate_low(taker_buy_ratio_1h). In gene_knowledge.priors, this pairing is supported with sufficient evidence (n=123, confidence: sufficient, shrink_weight: 0.86, rationale: 'Aggressors against the crowded side start the unwind'). In locked_candidate_overlap, gate_low reaches T1 floor with 537, 492, and 417 projected event observations across 1h, 2h, and 4h horizons.\n2. A stretch control term gate_tail(trend_sma_ratio_24h) to separate crowd unwinds from plain momentum. In priors, this is supported with n=48 (sufficient confidence, shrink_weight: 0.706). It projects 408, 323, and 248 event observations, reaching T1 floor.\n3. An absorption condition gate_low(depth_imbalance_10) capturing resting orderbook bid withdrawal. In locked_candidate_overlap, it projects 470, 401, and 329 event observations, reaching T1 floor.\nSearch scope is chosen as 'full' to allow exploratory automatic grid combinations across these three economically validated partner genes, providing adequate trial multiplicity for DSR deflation while preserving exact event-seeded formulas."
+}

@@ -1,0 +1,14 @@
+{
+  "hypothesis_id": "hyp_lab_liquidation_imbalance_24h_sign_1_XL_AVAXUSDT_15m_0_t70fe33b3",
+  "exchange": "Bybit",
+  "symbol": "AVAXUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Following significant 24h long liquidation imbalances (liquidation_imbalance_24h > 0.7), forced seller exhaustion combined with book absorption (depth_imbalance_10 > 1.5) or taker re-entry (taker_buy_ratio_1h > 1.5) produces a positive mean-reverting price snapback over 1h to 4h horizons.",
+  "narrative": "Large liquidation imbalances reflect non-discretionary forced liquidation cascades by leveraged margin accounts. Once aggressive liquidations cease, supply overhang clears while passive limit bids absorb remaining inventory. When accompanied by positive resting depth imbalance (depth_imbalance_10 > 1.5) or aggressive taker buying (taker_buy_ratio_1h > 1.5), market resilience triggers an immediate mean-reverting price rebound. Symmetrically, short liquidation squeezes lead to upward exhaustion and downward snapback, justifying a positive correlation between imbalance state and forward returns on the conditioned sub-sample.",
+  "research_rationale": "Unconditioned single-gene liquidation imbalance features historically suffer high mortality at T0.04-IC-STAT (over 270 kills in cemetery) because raw cascades often persist during high-momentum trending phases. Gating the imbalance on depth_imbalance_10 ensures resting orderbook liquidity is present to absorb remaining inventory, while gating on taker_buy_ratio_1h confirms aggressive market participant re-entry following forced liquidation exhaustion. Full search scope is selected to allow Layer 2.5 to explore coupling permutations while testing these specific pre-registered gate mechanisms. Both partners demonstrated 100% coverage and met all T1 event and day floor thresholds during probing."
+}

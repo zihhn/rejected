@@ -1,0 +1,15 @@
+{
+  "hypothesis_id": "hyp_lab_return_30m_btc_neutral_sign_-1_XL_ETHUSDT_15m_0_ta36d88a0",
+  "exchange": "Bybit",
+  "symbol": "ETHUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Acute 30-minute idiosyncratic price shocks in large-cap altcoins orthogonal to Bitcoin beta (|return_30m_btc_neutral| > 40 bps) represent temporary order flow displacement rather than fundamental repricing. Over the subsequent 30m to 4h horizons, as aggressive taker flow exhausts and resting order book liquidity provides absorption, the idiosyncratic deviation exhibits statistically significant mean-reversion (predicted_sign = -1).",
+  "narrative": "Large-cap altcoins frequently experience short-term idiosyncratic price shocks driven by concentrated taker flow, algorithmic liquidation sweeps, or transient order book imbalances that are uncorrelated with the broader market direction (BTC). When an altcoin's 30-minute return deviates substantially from its rolling 21-day beta against BTC (|return_30m_btc_neutral| > 0.004, or 40 bps), aggressive market orders have consumed available top-of-book depth without new fundamental information arriving at the market level. Informed liquidity providers step in to capture the transient dislocation, replenishing bid/ask depth (measured by depth_imbalance_10) while taker aggression subsides (measured by taker_buy_ratio_1h). Because no corresponding move occurred in BTC, market makers and cross-asset arbitrageurs fade the idiosyncratic excursion, forcing price back toward its rolling cointegration baseline. The reversal is particularly pronounced when conditioned on extreme order flow or volatility states where temporary liquidity impact is elevated.",
+  "research_rationale": "Anchor numbers: XL_ETHUSDT_3285f5bc7a31 exhibits 4788 matched rows across 379 active days on ETHUSDT (0.1219 match rate) and 13982 rows across 410 days basket-wide. Family dispersion: return_30m_btc_neutral has standard deviation 34.15 bps with rapid autocorrelation decay (-0.0106 at 1h, -0.0035 at 1d), demonstrating absence of slow drift. Gene prior alignment: follows gene_knowledge prior for btc_residual_return window variants with trigger partner taker_buy_ratio_1h and absorption partner depth_imbalance_10. Cemetery response: dominant cemetery kill code T0.04-IC-STAT (449/540 trials) reflects weak continuous IC on unconditioned bars; the design directly addresses this by pre-registering an extreme predicate (|return_30m_btc_neutral| > 0.004) and event gates (gate_high, gate_low, gate_tail) that concentrate trades on high signal-to-noise dislocations. Search scope full is selected to test grid interactions while honestly deflating DSR."
+}

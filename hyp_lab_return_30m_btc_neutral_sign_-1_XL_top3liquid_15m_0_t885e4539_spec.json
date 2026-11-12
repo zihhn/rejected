@@ -1,0 +1,17 @@
+{
+  "hypothesis_id": "hyp_lab_return_30m_btc_neutral_sign_-1_XL_top3liquid_15m_0_t885e4539",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "4h"
+  ],
+  "hypothesis_text": "When altcoins in top3_liquid (ETHUSDT, SOLUSDT) experience extreme idiosyncratic 30m return dislocations relative to BTC (|return_30m_btc_neutral| > 0.0035, outer 22% of observed bars), the abnormal dislocation is driven by transient order flow imbalances rather than fundamental permanent re-pricing. Consequently, forward returns over short horizons (1h to 4h) exhibit systematic mean reversion (-1 predicted sign), particularly when resting orderbook depth (depth_imbalance_10) provides passive absorption against the move and aggressive taker pressure (taker_buy_ratio_1h) abates.",
+  "narrative": "In crypto perpetual futures, short-term price discovery is heavily dominated by Bitcoin's macro beta. When an altcoin's 30-minute return abruptly diverges from its 21-day rolling OLS relationship with BTC (|return_30m_btc_neutral| > 0.0035), this idiosyncratic dislocation typically reflects transient inventory shocks or localized liquidity imbalances. Market makers and liquidity providers absorb these temporary order imbalances; as transient flow subsides, prices revert toward their cross-sectional equilibrium. Conditioning via orderbook depth imbalance (depth_imbalance_10) identifies regimes where resting liquidity buffers the move, and taker flow (taker_buy_ratio_1h) confirms the exhaustion of aggressive pressure. This reversal mechanism predicts a negative forward relationship (predicted_sign = -1) across 1h and 4h horizons.",
+  "research_rationale": "We pre-registered lab_return_30m_btc_neutral under the CROSS_SECTION economic family, which was ranked among the top recommended directions in the research direction catalog with low historical saturation. While the alpha cemetery shows 540 historical trials on return_30m_btc_neutral where 449 died at T0.04-IC-STAT due to unconditional dense testing, our design explicitly resolves this through a locked non-linear extremity condition (|return_30m_btc_neutral| > 0.0035) that isolates genuine dislocations while maintaining 410 independent events and 390 scoreable days (projected 255 T1 days, clearing the 250-day floor). We condition the mechanism with two live-servable partners identified in gene_knowledge.priors: depth_imbalance_10 (measuring passive orderbook absorption) and taker_buy_ratio_1h (measuring aggressive flow exhaustion). Both partners achieve 100% panel coverage, low collinearity with the anchor (corr 0.187 and 0.244), and projected T1 days exceeding 250. We select search_scope='full' to explore the composed interactions and gated variants while bounding multiplicity."
+}

@@ -1,0 +1,19 @@
+{
+  "hypothesis_id": "hyp_lab_upper_ratio_pct_sign_-1_XL_midcapalt_15m_0_t8acc4013",
+  "exchange": "Bybit",
+  "symbol": [
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme candlestick upper wick ratios (upper_ratio_pct > 0.8) on midcap altcoins reflect intra-bar buyer exhaustion and resting supply absorption, generating negative forward returns (reversal, predicted_sign = -1) over 30m to 4h horizons that are amplified when aggressive flow failed to hold the high or when resting asks dominate the orderbook.",
+  "narrative": "When an asset candle prints an extreme upper shadow (upper_ratio_pct > 0.8), it reflects an auction where intra-bar buyers pushed price to new local highs, but encountered substantial resting limit order supply or aggressive selling that fully absorbed the buying pressure and forced the close back down into the lower portion of the bar range. In liquid midcap altcoins (BNBUSDT, SOLUSDT, XRPUSDT), such rejections signify short-term buyer exhaustion and leave late-entering longs trapped at disadvantageous prices above the bar close. Over the following 30m to 2h, these trapped positions face inventory risk and liquidation pressure, leading to downward mean reversion and price decay. When paired with high taker buy volume (gate_high on taker_buy_ratio_1h), the rejection is particularly pronounced because aggressive buyers expended substantial order flow without holding the breakout, confirming trapped longs. When paired with dominant resting ask liquidity (gate_low on depth_imbalance_10), resting sell orders act as an overhead ceiling preventing immediate recovery and forcing the price downward.",
+  "research_rationale": "1. Route & Gene Selection: The hypothesis pre-registered the lab route on gene upper_ratio_pct (PRICE / MICRO family), which was ranked #4 by start_research recommended_directions and has zero prior anchor commitments in the registry. 2. Threshold Calibration: expression_lab profile established that upper_ratio_pct has mean 0.370, median 0.320, and p90 at 0.800 across 123,840 bars on midcap_alt with 1.0 coverage and negligible 1-day autocorrelation (0.001), ensuring events represent fresh microstructure shocks rather than slow-moving state persistence. 3. T1 Observation Floor: Evaluating upper_ratio_pct > 0.8 yields 12,456 matched rows across 430 days (421 scored days), projecting 275 T1 scored days, comfortably exceeding the t1_min_days floor of 250 days and satisfying observation criteria across all 3 midcap_alt symbols. 4. Conditioning & Cemetery: Although the cemetery shows 0 trials for upper_ratio_pct as primary anchor, other microstructure genes often suffer from cost erosion if left ungated and dense. By employing gate terms with taker_buy_ratio_1h, depth_imbalance_10, and spread_bps, trading is restricted to high-conviction rejection bars, mitigating transaction churn. 5. Search Scope: search_scope is set to full to allow exploratory evaluation of the anchor templates and automatic grid interactions across the admitted partner features."
+}

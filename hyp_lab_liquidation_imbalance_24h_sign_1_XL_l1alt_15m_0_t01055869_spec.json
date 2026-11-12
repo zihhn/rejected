@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "hyp_lab_liquidation_imbalance_24h_sign_1_XL_l1alt_15m_0_t01055869",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 24-hour long liquidation imbalance (liquidation_imbalance_24h > 0.5) in Layer-1 altcoins represents heavy forced selling pressure. When aggressive taker flow begins to stabilize (taker_buy_ratio_1h > 0.5) and resting bid depth provides passive absorption (depth_imbalance_10 > 1.5 sigma), the forced selling cascade exhausts, triggering price mean reversion and upward snapback (predicted_sign = +1) over 1h to 4h horizons.",
+  "narrative": "Economic Mechanism: 1. Anchor Phenomenon: Forced liquidations in perpetual futures create severe non-discretionary selling cascades that temporarily dislocate asset prices below fundamental equilibrium. The 24-hour rolling liquidation imbalance (liquidation_imbalance_24h) measures the net dominance of long liquidations over short liquidations. 2. Exhaustion Trigger: Liquidations are finite mechanical events; once levered long accounts are wiped out, the cascade of forced market sell orders terminates. The expression_lab predicate requires both severe 24h long liquidation dominance (liquidation_imbalance_24h > 0.5) and the cessation of aggressive selling pressure, signaled by aggressive taker buy ratio regaining parity (taker_buy_ratio_1h > 0.5). 3. Liquidity Absorption Conditioning: The price snapback requires structural absorption from passive market participants. We condition on order book resting depth imbalance (depth_imbalance_10 as gate_high), verifying that passive liquidity providers have positioned thick bid walls to absorb residual flow, and Garman-Klass volatility (volatility_garman_klass_1h as gate_tail) capturing the tail volatility signature of terminal capitulation. 4. Response Horizon: Price recovery occurs over 1h to 4h as market makers replenish liquidity, funding rates normalize, and unhedged short speculative chasers are forced to cover.",
+  "research_rationale": "Rationale for direction, partners, and cemetery response: 1. Direction Alignment: Inherited pre-registration binds the session to lab_liquidation_imbalance_24h on l1_alt with candidate_signs [1] and predicted_horizon_band ['1h', '2h', '4h']. This addresses the least-covered eligible family (LIQUIDATION, accounting load 17) in the direction catalog. 2. Alpha Cemetery Analysis: Prior trials on liquidation_imbalance_24h showed high mortality in single-gene dense formulas (top kill code T0.04-IC-STAT, 274 kills, survival rate 1.7%). However, spread and gated variants with depth_imbalance_10 and taker_buy_ratio_1h achieved the highest survival rates (9.5% at 1h-2h). Our design directly addresses T0.04-IC-STAT by introducing the expression_lab event gate (filtering to exhaustion bars where taker buying returns > 0.5) rather than trading every bar. 3. Partner Role & Gate Selection: depth_imbalance_10 provides resting absorption. Probe analysis confirms depth_imbalance_10 coverage = 1.0, low anchor correlation (-0.072), and gate_high reaches 274 projected scored days (well above the 250-day floor) with 723 projected event observations inside the candidate. volatility_garman_klass_1h gate_tail captures the terminal panic regime and reaches 273 projected scored days. 4. Search Scope: 'full' search scope is chosen to allow the automatic grid to explore interactions between the liquidation anchor and the absorption partners while retaining the core pre-registered expression_gate seed."
+}

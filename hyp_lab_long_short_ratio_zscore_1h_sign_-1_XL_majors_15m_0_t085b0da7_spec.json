@@ -1,0 +1,20 @@
+{
+  "hypothesis_id": "hyp_lab_long_short_ratio_zscore_1h_sign_-1_XL_majors_15m_0_t085b0da7",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme 1-hour retail account sentiment crowding (|z| > 1.3) on major cryptocurrencies reflects temporary positioning imbalances and FOMO exhaustion. When counter-trend taker aggression emerges (gate_opposite_side on taker_buy_ratio_1h) or when price is already stretched from the 24h trend (gate_tail on trend_sma_ratio_24h), market makers and informed flow absorb retail liquidity, driving systematic price mean-reversion over 1h to 4h forward horizons.",
+  "narrative": "Retail traders frequently chase short-term momentum, creating pronounced positioning imbalances captured by long_short_ratio_zscore_1h. At extreme levels (|z| > 1.3), retail positioning becomes highly crowded and vulnerable to exhaustion. However, unconditioned sentiment signals trade too frequently and suffer from high turnover and execution drag. By introducing conditioning mechanisms, we isolate high-conviction turning points: (1) taker_buy_ratio_1h via gate_opposite_side captures the arrival of counter-crowd aggressive flow absorbing retail orders, with gate_high and gate_low acting as baseline symmetric controls; and (2) trend_sma_ratio_24h via gate_tail identifies structural price stretch beyond 2 sigma where reversion tendencies are mechanically amplified. Over 1h to 4h horizons, this unwinding generates predictable negative drift relative to the retail crowd positioning, which we capture with a predicted sign of -1.",
+  "research_rationale": "We selected direction lab_long_short_ratio_zscore_1h from recommended directions (SENTIMENT family). Anomaly profile shows long_short_ratio_zscore_1h is symmetric across 206k rows with rapid autocorrelation decay (rho=0.038 at 1h). Evaluated candidate abs(long_short_ratio_zscore_1h) > 1.3 locked as XL_majors_9a2ef63ef78e with 42,861 events (20.77%), 430 active days, and 275 projected T1 days, well above the 250-day floor. Cemetery inspection reveals 1,552 historical trials for long_short_ratio_zscore_1h died primarily at T0.04-IC-STAT due to unconditioned churn, but conditioning with trend_sma_ratio_24h achieved the highest historical survival rate (10.0%), and taker_buy_ratio_1h achieved 6.9%. In accordance with gene priors (sentiment_crowding), we conditioned on taker_buy_ratio_1h (trigger partner, n=123, shrink weight 0.86) using gate_opposite_side along with gate_high and gate_low controls, and trend_sma_ratio_24h (stretch control, n=48, shrink weight 0.706) using gate_tail. Probing confirmed both partners exceed 99.9% coverage, yielding 1,549 and 2,236 projected T1 60m event observations over 266-273 active days, easily exceeding statistical validity thresholds. We set search_scope to 'full' for complete exploration of interaction spaces."
+}

@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_rsi_14_30m_sign_-1_XL_alttheme_15m_0_t6c0d9030",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "In cryptocurrency perpetual futures across the alt_theme universe, extreme statistical departures of 14-period 30-minute RSI from the neutral midpoint (|rsi_14_30m - 50.0| > 15.0) represent unsustainable momentum overextension that predicts short-horizon price mean-reversion (predicted_sign = -1). Specifically, when an altcoin reaches an extreme overbought state (RSI > 65.0), forward returns over 30m to 4h horizons are systematically negative; conversely, when an altcoin reaches an extreme oversold state (RSI < 35.0), forward returns are systematically positive. This mean-reverting edge is significantly strengthened when aggressive taker order flow turns against the extended direction (trigger: taker_buy_ratio_1h opposite side) and when retail account positioning is heavily crowded in the direction of the extension (exposure: long_short_ratio_zscore_7d tails), while elevated Garman-Klass volatility provides the liquidity absorption necessary for contrarian market makers to absorb the final capitulation wave.",
+  "narrative": "The economic mechanism rests on the dynamics of liquidity provision and inventory management during momentum exhaustion in high-beta altcoin perpetual futures. When an asset experiences a sustained directional impulse, retail momentum chasers and trend-following algorithms aggressively enter market orders, driving the 14-period 30m RSI to statistical extremes (|RSI - 50| > 15). At these extreme levels, two critical market forces emerge. First, retail positioning becomes one-sided and crowded: retail traders hold leveraged positions at adverse entry prices, leaving them vulnerable to any adverse price tick. Second, the aggressive taker flow that propelled the initial move begins to dry up as buy-side (or sell-side) buying power is exhausted. Contrarian liquidity providers and institutional market makers, facing inventory imbalances, begin posting asymmetric limit orders to lean against the move. Once aggressive taker order flow slows and flips toward the opposite side (detected via taker_buy_ratio_1h opposite_side), the aggressive support holding the price at the extreme vanishes. Bids (or asks) evaporate, triggering forced stops and liquidations among late momentum entrants. This cascade generates sharp mean-reverting price action over subsequent 30m to 4h horizons. In ranging markets, RSI oscillations are mild and noise-dominated; however, in trending and stressed regimes, RSI extremes reflect genuine structural dislocations where exhaustion reversals are most pronounced.",
+  "research_rationale": "We selected lab_rsi_14_30m as recommended direction #6 by the Layer 2.6 engine for the alt_theme universe at 15m cadence. The candidate stat has zero prior commitments across all baskets (direction_load: 0, base_gene_anchor_load: 0), leaving the REV family unexplored. Expression profiling across 330,008 bars of 8 alt_theme assets revealed rsi_14_30m has a stable mean of 49.90, std of 11.23, and median of 49.88, with rapid autocorrelation decay (dropping to -0.04 at 1 day), confirming high day-to-day sample independence. Evaluating |rsi_14_30m - 50.0| > 15.0 matched 60,964 bars (18.47% match rate) across 430 active days with 12,797 episodes, yielding an exact balance between positive (30,116 bars) and negative (30,848 bars) departures from symbol-level medians. T1 projection confirmed 418 scored days and 273 projected T1 days, cleanly exceeding the t1_min_days floor of 250 days. The candidate was locked as XL_alt_theme_c9dd823bd597 with predicted_sign = -1 (reversal on both positive and negative extremes). In accordance with gene_knowledge.priors for rsi_extreme, we incorporated: (1) taker_buy_ratio_1h as trigger via gate_opposite_side, supported by gate_high and gate_low controls to satisfy side-tied requirement; (2) long_short_ratio_zscore_7d as exposure via gate_tail (|z| > 2); and (3) volatility_garman_klass_1h as absorption via gate_tail. Probing all three partners confirmed 100% coverage, full live-servability, and robust T1 floor projections (>250 days). In the cemetery, rsi_14_30m has 0 prior trials (untested); by pairing the overextension predicate with contrarian flow triggers and account exposure gates, our design directly mitigates T0.04 low-IC and T1.10 ICIR collapse by isolating high-conviction exhaustion turning points rather than trading every minor swing."
+}

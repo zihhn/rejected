@@ -1,0 +1,21 @@
+{
+  "hypothesis_id": "hyp_lab_shadow_imbalance_4h_sign_-1_XL_majors_15m_0_t14f0615a",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Persistent upper shadow dominance (shadow_imbalance_4h > 0.05) over 4-hour trailing windows reflects localized aggressive buyer exhaustion and overhead passive supply absorption in major liquid cryptocurrencies. When buyers fail to sustain upward breakouts and leave prolonged upper wicks, price experiences downward mean reversion over 30m to 4h horizons.",
+  "narrative": "Microstructure candlestick wicks capture intra-bar order flow dynamics and liquidity availability. When prices rally into overhead resistance but are repeatedly absorbed by institutional resting limit ask orders, the resulting candlestick prints extended upper shadows. Over a 4-hour rolling window, a positive shadow imbalance (upper shadow significantly exceeding lower shadow) demonstrates that multiple successive breakout attempts have been repelled by sellers. Aggressive market buyers exhaust their purchasing power against passive liquidity walls. Once buyer volume subsides, the absence of aggressive bids combined with inventory unwinding from trapped late longs drives price lower, generating negative forward returns across the 30m to 4h horizon. The addition of taker buy flow and volatility gating isolates regimes where aggressive demand was demonstrably rejected in elevated volatility.",
+  "research_rationale": "The candidate is anchored on lab_shadow_imbalance_4h (basket-wide lock XL_majors_38336da2c423 on majors) where shadow_imbalance_4h > 0.05. Across 206,325 scan-window bars, the condition matches 51,386 rows (24.9% match rate) across 429 active days and 8,179 episodes, providing 429 independent events well above the 30 floor. T1 projected scored days reach 270 days (above the 250 day floor), certifying observation viability. Autocorrelation falls sharply from 0.95 at 1 bar to 0.09 at 4h and 0.01 at 1d, verifying that daily events are non-sticky. The anchor cemetery for this gene is completely fresh (trials: 0, untested). We condition on taker_buy_ratio_1h (via gate_high and gate_low) and volatility_garman_klass_1h (via gate_tail) to evaluate flow trigger and volatility absorption, all showing 100% panel coverage in probe_partner. Search scope is set to full to explore grid interactions while prioritizing the pre-registered event mechanism."
+}

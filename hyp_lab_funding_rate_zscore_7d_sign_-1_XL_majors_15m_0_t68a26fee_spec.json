@@ -1,0 +1,20 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_7d_sign_-1_XL_majors_15m_0_t68a26fee",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "In major perpetual futures contracts (BNB, BTC, ETH, SOL, XRP), extreme 7-day funding rate dislocations (|z| > 1.5) indicate unsustainable directional carry crowding. Longs paying elevated funding premiums or shorts paying discounts face continuous carry bleed. When aggressive taker flow turns against this crowded positioning (taker buy ratio on opposite side), carry unwind accelerates, resulting in price mean reversion over 1h to 4h horizons.",
+  "narrative": "Perpetual funding rate mechanism: Funding payments periodically transfer cash between longs and shorts to tether perpetual contracts to spot prices. When funding rate z-score over a 7-day window diverges beyond 1.5 standard deviations, speculative positioning has become heavily one-sided, demanding an unsustainable liquidity premium. In major liquid perpetuals, retail and momentum traders frequently crowd into carry trades during extended trends. As funding accumulates, maintaining leverage becomes increasingly costly. The critical trigger occurs when aggressive taker flow (measured by taker_buy_ratio_1h) shifts to the opposite side of the crowded carry, creating immediate adverse inventory pressure. Market makers absorb this flow and widen spreads against the crowded side, prompting leveraged positions to de-risk and exit. Furthermore, when open interest has expanded (oi_change_pct_4h > 1.5 sigma), the pool of trapped capital is larger, deepening the required inventory rebalancing and accelerating mean reversion over the subsequent 1h to 4h evaluation windows.",
+  "research_rationale": "The locked candidate XL_majors_868cce82809d isolates extreme 7-day funding rate z-score events (|z| > 1.5) across the majors basket (BNB, BTC, ETH, SOL, XRP), capturing 27,646 bars (13.62% of panel) across 321 independent active days and 677 episodes, with well-balanced representation across positive (7,644) and negative (20,002) tails. In inspect_catalog cemetery analysis, funding_rate_zscore_7d trials experienced dominant kills at T0.04-IC-STAT (579/694 trials) due to unconditioned dense signals trading continuously and suffering from autocorrelation drift. Our design directly addresses this failure mode by: (1) anchoring on the locked event predicate |z| > 1.5 to eliminate continuous non-event noise; (2) incorporating trigger conditioning via gate_opposite_side on taker_buy_ratio_1h, which follows the market-structure gene prior (n=36, shrink_weight=0.643) where aggressive order flow against crowded carry triggers the unwind; (3) committing explicit gate_high and gate_low controls on taker_buy_ratio_1h to satisfy side-tied independence controls and isolate the directional trigger from general taker activity; and (4) adding an exposure gate (gate_high on oi_change_pct_4h, n=18 prior) to capture scenarios where leverage expansion heightens liquidation sensitivity. Probe partner analysis verifies full 1.0 coverage across all partner features, near-zero anchor correlation (r = -0.05 for taker ratio, r = 0.025 for OI change), and confirmed T1 floor reachability (projected observations > 400 across 1h-4h horizons vs 250 floor)."
+}

@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "hyp_lab_rsi_14_30m_sign_-1_XL_l1alt_15m_0_t43471e3d",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme momentum extensions on intermediate horizons (14 periods of 30-minute intervals, i.e., 7-hour lookback RSI differing from neutral 50 by > 18 points) indicate localized liquidity exhaustion in Layer 1 alternative assets. In these states, aggressive directional flows become overextended and unsustainable. When conditioned on extreme retail sentiment positioning (long_short_ratio_zscore_7d |z| > 2), orderbook depth imbalance (depth_imbalance_10 |z| > 2), and extreme aggressive taker flow (taker_buy_ratio_1h |z| > 1.5), the probability of mean-reversion over 1-hour to 4-hour forward horizons is significantly enhanced. The predicted forward return sign is negative (-1) with respect to the signed RSI deviation from 50 (i.e. high RSI predicts negative forward excess return, and low RSI predicts positive forward excess return).",
+  "narrative": "1. Market Microstructure & Structural Exhaustion: In crypto altcoin markets, price trends frequently overshoot due to retail herd behavior, cascading liquidations, and aggressive market-order chasing. An RSI(14) computed on 30m bars spans 7 hours, capturing multi-hour momentum thrusts. An absolute deviation exceeding 18 points (RSI > 68 or RSI < 32) reflects an extreme dislocation (top ~11.8% of historical distribution). Over 80% of these occurrences happen in trending regimes where momentum becomes overstretched.\\n\\n2. Conditioning Signals & Catalysts:\\n- Retail Positioning (long_short_ratio_zscore_7d): When top trader or account long/short ratios reach multi-day extremes (|z| > 2), positioning is one-sided and crowded. Subsequent liquidity runs trigger forced rebalancing, accelerating reversal.\\n- Order Book Liquidity Imbalance (depth_imbalance_10): When the top-10 depth imbalance diverges into tail territory (|z| > 2), passive liquidity absorbs exhausted market orders, setting up an adverse-selection trap for aggressive market participants.\\n- Aggressive Flow Exhaustion (taker_buy_ratio_1h): When the 1-hour taker buy ratio reaches +1.5 sigma (exhaustion buying into resistance) or -1.5 sigma (capitulation selling into support), the immediate impulse ceases and reversion ensues.\\n\\n3. Investment Mechanics: By combining intermediate momentum extremity with positioning and orderbook gates, the alpha eliminates false breakout signals and isolates genuine price reversals across the 1-hour to 4-hour forward holding windows.",
+  "research_rationale": "1. Search Scope: We selected 'full' scope to allow Layer 2.5 to explore the canonical composition grid around the anchor and nominated partners while evaluating our pre-registered gate terms.\\n2. Alignment with Gene Knowledge & Priors:\\n- The catalog's gene_knowledge prior table indicates taker_buy_ratio_1h as a primary trigger with opposite_side relation for reversal mechanics, and long_short_ratio_zscore_7d as an exposure partner. Our composition plan directly tests these relationships using gate_high/gate_low and gate_tail conditions.\\n- Depth imbalance (depth_imbalance_10) provides an orthogonal microstructure confirmation: when book depth skews against the direction of momentum, reversal probability increases due to passive absorption.\\n3. Cemetery Analysis & Dominant Kill Codes:\\n- Cemetery inspection confirmed that lab_rsi_14_30m has 0 prior T0/T1 trials (fresh direction, no cemetery kills).\\n- Across broader mean-reversion alphas in cemetery, dominant kill codes are T1.09 (cross-validation IC instability) and T1.10 (low ICIR / high turnover cost decay).\\n- Our design directly mitigates these failure modes: (a) By locking a disciplined deviation threshold (|RSI - 50| > 18) that occurs on ~11.8% of bars across 429 days (269 projected T1 days, clearing the 250-day floor), we avoid sparse overfitted triggers while filtering out low-conviction noise; (b) By applying gate terms, the strategy trades selectively rather than continuously every bar, slashing transaction costs and turnover drag; (c) By testing across a 7-asset L1 basket under market-neutral adjustment, idiosyncratic cross-sectional signal is isolated from broad crypto market beta."
+}

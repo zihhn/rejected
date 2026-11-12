@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_30d_sign_-1_XL_l1alt_15m_0_td6181e9e",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Extreme deviations in the 30-day funding rate z-score on L1 altcoin perpetual futures (|z| > 1.2) signal unsustainable speculative leverage. When aggressive taker volume leans against the prevailing carry imbalance (sellers dominating positive funding, or buyers dominating negative funding), crowded carry trades are forced to de-lever, predicting a forward price reversal over 1h to 4h horizons.",
+  "narrative": "Funding rate carry exhaustion and unwind on perpetual futures. When perpetual futures funding rate 30-day z-score reaches extreme levels (|z| > 1.2), capital allocation to carry trades becomes excessively stretched. In altcoins (l1_alt basket), speculative retail traders crowd into directional levered positions, causing the funding rate to depart substantially from zero. Longs pay high financing costs to shorts during positive funding spikes, while shorts pay longs during negative funding spikes. As the cost of maintaining leverage compounds, levered positions become fragile to momentum exhaustion. When aggressive market orders (taker flow) push against the crowded carry direction (gate_opposite_side: takers selling when funding is high, or takers buying when funding is low), crowded traders are forced into liquidation and de-leveraging, triggering an intraday price reversal across 1h to 4h horizons.",
+  "research_rationale": "We examine funding_rate_zscore_30d on the l1_alt basket (ADA, AVAX, DOT, LTC, NEAR, SUI, TRX) over 288,960 bars (2024-06-01 to 2025-08-04). In inspect_catalog, the cemetery records 962 prior trials on funding_rate_zscore_30d with a dominant kill code at T0.04-IC-STAT (785 trials), proving that continuous linear funding formulas fail because funding extremes are episodic rather than steady linear predictors. Crucially, the cemetery reveals that conditioning on taker flow (taker_buy_ratio_1h) yielded 9 T1 survivors (13.2% survival rate), the highest among all tested partners. Gene knowledge priors support this with sufficient confidence (n=36, shrink_weight=0.643) for carry_unwind with exhaustion_reversal triggered by opposite-side taker flow. In expression_lab, our locked predicate abs(funding_rate_zscore_30d) > 1.2 captures 46,164 bars (17.17% match rate) across 814 episodes and 328 independent active days, successfully achieving reaches_t1_floor=true with 4,415 projected T1 event observations at 60m. Probe_partner confirms 100% data coverage for taker_buy_ratio_1h, oi_change_pct_4h, and long_short_ratio_zscore_7d. The gate_opposite_side term captures 3,758 bars with 306 independent events, projecting 880 T1 observations at 60m (well above the 250 floor). To satisfy side-tied requirements and guard against sign confounding, we commit gate_high and gate_low controls on taker_buy_ratio_1h, alongside gate_high on oi_change_pct_4h (n=18 prior) to capture high-leverage buildup regimes. We select search_scope='full' to allow exploratory combination across these identified risk channels."
+}

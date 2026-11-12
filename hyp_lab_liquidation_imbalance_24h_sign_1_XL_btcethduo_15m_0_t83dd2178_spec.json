@@ -1,0 +1,17 @@
+{
+  "hypothesis_id": "hyp_lab_liquidation_imbalance_24h_sign_1_XL_btcethduo_15m_0_t83dd2178",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "When 24-hour liquidation volume on BTCUSDT and ETHUSDT is heavily dominated by one side (abs(liquidation_imbalance_24h) > 0.60), the levered speculative positions on that side have been thoroughly flushed and liquidated. Because liquidation cascades deplete available market orders and leave residual positioning substantially de-leveraged, subsequent price action exhibits mean-reversion over 1h to 4h horizons. On the positive side (forced long selling), selling exhaustion leads to upward price recovery (+1); on the negative side (forced short buying), buying exhaustion leads to downward price reversal (-1).",
+  "narrative": "In crypto perpetual futures, aggressive speculative crowding often accumulates substantial leverage. When adverse price moves trigger liquidation cascades, the matching engine executes market orders that violently push prices into temporary extremes. For liquidation_imbalance_24h > 0.60, long liquidations have generated persistent forced selling over the trailing 24 hours. Once this forced selling completes, the inventory overhang is cleared, open interest drops, and captive supply vanishes. If passive order book depth (depth_imbalance_10 > 1.5) provides a resting bid cushion, aggressive taker selling abates and prices rebound upward (+1). Conversely, for liquidation_imbalance_24h < -0.60, short squeezes force buy liquidations; once forced buyers are exhausted and depth_imbalance_10 < -1.5 provides resting ask resistance, the market reverses downward (-1). Conditioning on taker flow capitulation (taker_buy_ratio_1h gate_tail) and volatility expansion (volatility_garman_klass_1h gate_tail) isolates the peak exhaustion phase of the liquidation cycle from normal drift.",
+  "research_rationale": "The anchor candidate XL_btc_eth_duo_96e8091b5a7c locks the two-sided predicate abs(liquidation_imbalance_24h) > 0.60, identifying 30,713 matched bars (37.29% match rate) across 393 independent events on BTCUSDT and ETHUSDT, with a well-balanced sign split (17,403 positive vs 13,310 negative). The 24h autocorrelation is low (0.047 at 1d), demonstrating episodic independence across days. In the cemetery records for liquidation_imbalance_24h (357 trials, 6 survived), the primary kill code was T0.04-IC-STAT (274 trials) for unconditioned dense formulas. The only configurations that survived T1 were gated/spread variants combining liquidation imbalance with depth_imbalance_10 and taker_buy_ratio_1h. We address this directly by pre-registering event gates (taker_buy_ratio_1h gate_tail, depth_imbalance_10 gate_high/gate_low, and volatility_garman_klass_1h gate_tail) which project 520-835 event observations in T1, comfortably exceeding the T1.11 observation floor of 250. What the scan evidence does not show is forward return predictive power, as the discovery panel is descriptive only. Sizing was cross-checked against observed liquidation days (3,736 matched rows, 53.3% match rate across 38 days) to ensure the threshold remains effective on the exchange's websocket feed in T1."
+}

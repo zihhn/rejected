@@ -1,0 +1,14 @@
+{
+  "hypothesis_id": "hyp_lab_return_15m_btc_neutral_sign_-1_XL_SOLUSDT_15m_0_t08e08dd8",
+  "exchange": "Bybit",
+  "symbol": "SOLUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h"
+  ],
+  "hypothesis_text": "Extreme 15-minute idiosyncratic return shocks relative to BTC (abs(return_15m_btc_neutral) > 0.003) on major altcoins exhibit predictable mean-reversion over 30m to 2h horizons. The transient price displacement caused by aggressive taker order flow sweeping the book overshoots fundamental value, leading liquidity providers and arbitrageurs to rebalance inventory once taker aggression halts, generating an edge of predicted_sign = -1 on positive residual return.",
+  "narrative": "When a major altcoin deviates sharply from its empirical 21-day beta relationship with Bitcoin over a 15-minute bar (|residual| > 30 bps), market microstructure friction causes temporary overextension. Aggressive takers consume top-of-book depth, pushing prices away from equilibrium. Because market makers widen spreads during rapid moves, the resulting price impact is predominantly transient. Once aggressive flow subsides—as measured by tail extremes in taker_buy_ratio_1h and depth_imbalance_10, alongside elevated volume_ratio_1h—liquidity provision resumes and inventory rebalancing drives cross-sectional prices back towards equilibrium over the subsequent 30 to 120 minutes. Therefore, an outperforming idiosyncratic return predicts negative forward excess return (predicted_sign = -1), while an underperforming idiosyncratic shock predicts positive forward recovery.",
+  "research_rationale": "Direction return_15m_btc_neutral addresses the CROSS_SECTION family, one of the least covered families in the system (load 22, live-servable). The anchor candidate XL_SOLUSDT_1fd9beeef714 was locked from a balanced 26,120-match evaluation (13,052 positive vs 13,068 negative) yielding 409 independent events and 254 projected T1 days, clearing the T1 observation floor. Cemetery analysis for return_15m_btc_neutral indicates 813 prior trials where dominant deaths were T1.20-REGIME-FILTER (290) and T0.04-IC-STAT (222). Our design directly addresses these historical failure modes: target_regime is set to 'all' to ensure primary variants are evaluated unencumbered by fragile regime filters, while gate_tail and gate_high conditioning on taker flow, book depth, and volume surge isolate high-conviction exhaustion bars, lifting signal-to-noise ratio to clear T0.04. Furthermore, taker_buy_ratio_1h follows the prior table (source prior, n=60, sufficient confidence) for flow exhaustion, while depth_imbalance_10 incorporates cemetery evidence where depth ratio/max achieved the highest survival rates (30-33%). Search scope 'full' is chosen to explore these three orthogonal dimensions."
+}

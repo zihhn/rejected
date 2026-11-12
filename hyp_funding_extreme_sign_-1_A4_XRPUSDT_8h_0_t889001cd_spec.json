@@ -1,0 +1,15 @@
+{
+  "hypothesis_id": "hyp_funding_extreme_sign_-1_A4_XRPUSDT_8h_0_t889001cd",
+  "exchange": "Bybit",
+  "symbol": "XRPUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "2h",
+    "4h",
+    "12h",
+    "1d"
+  ],
+  "hypothesis_text": "Extreme positive funding rate anomalies (funding_rate_zscore_30d > 1.0) coinciding with elevated aggressive taker buy volume (taker_buy_ratio_1h > 0.5) reflect crowded long positioning at cyclical exhaustion tops on midcap altcoins (XRP, BNB, SOL). High carry cost combined with saturated buyer momentum forces subsequent position unwinding, generating negative forward returns across 2h to 1d horizons.",
+  "narrative": "In crypto perpetual futures on midcap assets, aggressive directional momentum often draws leveraged retail participants into long positions, driving the 8-hour funding rate to extreme positive levels (as observed on XRPUSDT reaching +0.115% per 8h, z = 30.19). Holding these positions incurs substantial continuous carry fees. When taker buy volume is saturated above 0.50, new incremental buyers become scarce, leaving the orderbook exposed to mean-reverting pressure. As momentum stalls, long holders face decaying PnL and aggressive fee bleeding, triggering forced or defensive inventory liquidation that drives price downward over intermediate horizons of 2h to 24h.",
+  "research_rationale": "The anchor A4_XRPUSDT_562 represents a severe statistical anomaly (z = 30.19, n_eff = 188, confirm z = 9.59) occurring during the Dec 2024 sector-wide funding surge across BNB, SOL, and XRP. The cemetery digest indicates that 785 of 962 historical funding trials died at T0.04-IC-STAT due to unconditional continuous linear scoring. To directly overcome this, the design uses a locked expression_gate candidate (XLC_c3c52b7f5108) requiring funding_rate_zscore_30d > 1.0 and taker_buy_ratio_1h > 0.5, isolating the acute exhaustion cohort. Gene priors for funding_extreme recommend taker_buy_ratio_1h as a trigger partner (n=36, sufficient confidence) and oi_change_pct_4h as leverage exposure. Both partners exhibit 100% panel coverage and qualify under T1 daily floor projections. Search scope full is selected to explore automated grid couplings while testing pre-registered gate terms as explicit controls."
+}

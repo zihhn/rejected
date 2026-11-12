@@ -1,0 +1,17 @@
+{
+  "hypothesis_id": "hyp_lab_funding_rate_zscore_7d_sign_-1_XL_btcethduo_15m_0_tdb2bab52",
+  "exchange": "Bybit",
+  "symbol": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "Persistent extreme 7-day funding rate dislocations (funding_rate_zscore_7d > 1.25 or < -1.25) reflect overleveraged, crowded carry positions in BTC and ETH perpetual futures. When aggressive order flow opposes the carry side (taker_buy_ratio_1h leans against the funding sign), the crowded positions experience inventory exhaustion and liquidity rebalancing, leading to a systematic price mean-reversion over 1h to 4h horizons.",
+  "narrative": "Perpetual futures rely on periodic funding payments to anchor perp prices to spot index values. In crypto markets (BTCUSDT and ETHUSDT), a prolonged 7-day accumulation of extreme positive funding indicates speculative long crowding, where longs pay substantial carry fees to shorts. Conversely, extreme negative funding indicates persistent short crowding. When taker flow actively trades in the opposite direction of the funding crowding (gate_opposite_side: taker selling during positive funding extremes, or taker buying during negative funding extremes), the marginal demand supporting the crowded carry vanishes. Overleveraged traders face margin pressure and liquidation risk, triggering an unwind that forces prices to mean-revert. The edge is specifically conditioned on order flow opposition rather than continuing drift, as pure funding carry can persist in trending momentum regimes unless checked by active counterparty flow.",
+  "research_rationale": "Anchor numbers: Match rate 21.28% on eligible rows (17280 matched bars), 380 episodes, 280 active days, 280 independent events across BTCUSDT (187) and ETHUSDT (193). Dispersion: std = 1.266, range [-25.88, +25.88], p05 = -1.94, p95 = +1.48 across 81218 bars. Autocorrelation decays to 0.148 at 1d, avoiding slow-state persistence traps. Evidence limitations: Descriptive scan frequencies do not guarantee out-of-sample edge; T1 evaluation provides the first unconfounded test. Gene prior and ledger: taker_buy_ratio_1h directly matches the market-structure prior for carry unwind (prior_match: window_variant, expected_response: exhaustion_reversal, role trigger, direction opposite_side). gate_high and gate_low on taker_buy_ratio_1h are committed as required side-tied controls. Cemetery kill codes: Historical trials for funding_rate_zscore_7d suffered 579 kills at T0.04-IC-STAT due to unconditioned continuous funding formulas having near-zero IC during normal non-extreme regimes. Our design directly addresses this by locking an extreme predicate (|z| > 1.25) and gating on opposing aggressive taker flow (gate_opposite_side), concentrating trials strictly on bars with active carry unwinding. Furthermore, the 1h and 2h horizons selected align with the only historical survival horizons (4 survived at 1h, 1 at 2h; 0 at 30m and 4h)."
+}

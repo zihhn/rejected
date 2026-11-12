@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "hyp_lab_return_4h_sign_-1_XL_l1alt_15m_0_tfc68b89d",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "We hypothesize that extreme 4-hour return dislocations across L1 alternative cryptocurrencies (abs(return_4h) > 0.02) reflect temporary liquidity overshoots that predictably mean-revert over forward 1h to 4h horizons (predicted_sign = -1 on the positive dislocation side, and symmetrically positive on negative dislocation). This mean reversion is intensified when conditioned on climactic trading volume (volume_ratio_1h > 1.5 sigma) and extreme order book depth imbalance (depth_imbalance_10 tail gate), which mark liquidity exhaustion and resting order book absorption.",
+  "narrative": "In cryptocurrency derivatives markets, rapid multi-hour price runs on altcoins are frequently driven by momentum-chasing aggressive market orders and short-term speculative cascades. Over an intermediate 4-hour window, such moves often consume available resting limit orders, temporarily dislocating the price away from fundamental inventory equilibrium. Once aggressive taker flow is exhausted, market makers and liquidity providers lean against the dislocation by refilling resting limit order depth (reflected in depth_imbalance_10) or absorbing final climactic surges (reflected in volume_ratio_1h). Because liquidity providers require compensation for inventory risk, price mean-reverts over the subsequent 1h to 4h horizon as temporary price impact fades. Conversely, in the absence of continued aggressive buying/selling, prices retrace toward the rolling mean. Conditioning on high volume and book depth tail gates isolates genuine exhaustion turning points from persistent structural trends.",
+  "research_rationale": "The scan panel on l1_alt (288,827 bars across 7 assets from 2024-06 to 2025-08) reveals return_4h with mean 0.019%, std 1.82%, and wide dispersion (min -8.63%, max +10.20%). Autocorrelation decays rapidly to 0.0047 at 4 hours, ensuring distinct episodic observations. The locked candidate XL_l1_alt_4bea8e8f026f selects 58,780 bars (20.35%) evenly divided between positive (29,703) and negative (29,077) returns, projecting 267 T1 scored days (exceeding the 250 floor). Probed partners volume_ratio_1h, taker_buy_ratio_1h, and depth_imbalance_10 all achieved 1.0 panel coverage. Their gate projections each comfortably exceed T1 observation floors (271, 264, and 274 projected scored days respectively). In the catalog cemetery, return_4h is completely untested (0 prior trials), and the prior table marks these pairings exploratory, which avoids uncharged selection bias. We select search_scope='full' to allow exploratory evaluation of the automated grid alongside our authored gates. What the evidence does not show is out-of-sample forward edge: frequencies and coverage confirm observation density and stability, but true predictive edge remains to be determined by Layer 2.5 T1 gates."
+}

@@ -1,0 +1,24 @@
+{
+  "hypothesis_id": "hyp_lab_marubozu_side_sign_1_XL_alttheme_15m_0_ta068179f",
+  "exchange": "Bybit",
+  "symbol": [
+    "LINKUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "AAVEUSDT",
+    "ARBUSDT",
+    "OPUSDT",
+    "DOGEUSDT",
+    "1000PEPEUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "30m",
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "15m candles exhibiting minimal wick rejection (marubozu_side with wicks <= 5% of total candle range) reflect aggressive directional liquidity sweeps that lead to persistent momentum continuation over 30m to 4h horizons across liquid altcoins, particularly when confirmed by volume expansion and orderbook depth imbalance.",
+  "narrative": "During aggressive market impulses, takers sweep resting limit orders across the book resulting in a bar that opens near one extreme and closes near the opposite extreme with virtually no shadow rejection. This signifies overwhelming directional dominance and forced inventory adjustments among market makers, causing forward momentum to persist across the 30m to 4h horizon as liquidity reconstitutes.",
+  "research_rationale": "Candidate XL_alt_theme_05a0a9c9edaf was locked on the alt_theme panel over 430 independent event days with 7,255 matched bars and balanced positive/negative split. Search scope 'full' is selected because lab_marubozu_side is a newly registered exploratory gene with zero prior trials in the cemetery (dominant_kill_codes is empty) and no existing prior table entry in gene_knowledge. For composition terms: (1) gate_high on volume_ratio_1h conditions on institutional volume expansion (>1.5 sigma) to filter out low-liquidity noise, projecting 269 scored days in T1; (2) gate_tail on depth_imbalance_10 conditions on structural orderbook skew (|z| > 2.0) confirming asymmetric liquidity backing, projecting 273 scored days in T1; (3) gate_tail on taker_buy_ratio_1h conditions on aggressive taker flow imbalance (|z| > 2.0), projecting 269 scored days in T1. All three partner columns achieved 1.0 coverage in probe_partner and each term surpasses the T1 250-day requirement."
+}

@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "hyp_lab_long_short_ratio_zscore_1h_sign_-1_XL_SOLUSDT_15m_0_t777d8a1c",
+  "exchange": "Bybit",
+  "symbol": "SOLUSDT",
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h"
+  ],
+  "hypothesis_text": "Acute 1-hour retail sentiment crowding in perpetual futures (|long_short_ratio_zscore_1h| > 1.4 on 15m cadence) paired with climactic trading volume (volume_ratio_1h with z > 1.5 or |z| > 2) signals exhaustive liquidity absorption by market makers, creating a predictable mean-reverting price unwind over 1h to 2h horizons (predicted_sign = -1).",
+  "narrative": "In cryptocurrency perpetual futures, retail and aggressive directional traders exhibit herd behavior during rapid intraday moves, rapidly accumulating one-sided long or short positions over short 1-hour windows. This crowding is captured by acute spikes in long_short_ratio_zscore_1h (|z| > 1.4). When this extreme positioning is accompanied by a surge in trading activity (volume_ratio_1h with z > 1.5 or |z| > 2), it indicates climactic blow-off volume where aggressive retail orders are absorbed by passive institutional market maker limit orders. Once retail buying or selling power is exhausted at peak volume, the lack of incremental aggressive flow leaves prices vulnerable to swift inventory rebalancing and mean reversion. Over the subsequent 1 to 2 hours, this creates a systematic contrarian price reversal across midcap altcoins (predicted_sign = -1).",
+  "research_rationale": "We selected lab_long_short_ratio_zscore_1h as the least covered eligible economic family (SENTIMENT, rank 6, base gene load 4) to expand empirical breadth across the midcap_alt basket (SOL, BNB, XRP). In cemetery records, raw 1h sentiment alphas predominantly failed at T0.04-IC-STAT due to unconditioned churn and lack of volume discrimination. To directly counter this historical failure mode, we condition the anchor on volume_ratio_1h via: (1) gate_high on volume_ratio_1h (z > 1.5, projecting 403 scored days) to isolate high-volume climactic surges; (2) gate_tail on volume_ratio_1h (|z| > 2.0, projecting 365 scored days) to capture tail liquidity events; and (3) an interaction term scaling sentiment extremity by relative volume intensity. Both gate terms comfortably exceed the 250 T1 day floor. By replacing trend and taker-buy genes with volume_ratio_1h, this commitment tests an orthogonal volume-exhaustion mechanism without repeating pending queue experiments. We selected search_scope full to explore automated coupling across the midcap basket while strictly maintaining market_neutral cross-sectional neutralization to eliminate broader crypto beta."
+}

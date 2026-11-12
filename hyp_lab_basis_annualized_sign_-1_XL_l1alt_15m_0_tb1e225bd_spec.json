@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "hyp_lab_basis_annualized_sign_-1_XL_l1alt_15m_0_tb1e225bd",
+  "exchange": "Bybit",
+  "symbol": [
+    "ADAUSDT",
+    "AVAXUSDT",
+    "TRXUSDT",
+    "SUIUSDT",
+    "NEARUSDT",
+    "DOTUSDT",
+    "LTCUSDT"
+  ],
+  "discovery_window": "2024-06-01/2026-05-29",
+  "predicted_horizon_band": [
+    "1h",
+    "2h",
+    "4h"
+  ],
+  "hypothesis_text": "When annualized basis dislocations spike positive simultaneously with elevated 30-day funding rate z-scores on L1 altcoins, carry arbitrageurs exploit the premium through cash-and-carry selling, leading to systematic 1h to 4h basis compression and negative forward returns.",
+  "narrative": "In cryptocurrency perpetual futures, when annualized basis expands into positive territory while 30-day funding rate z-scores exceed 0.5 sigma, long speculative participants pay a continuous funding fee every 8 hours while holding contracts traded at an elevated premium to spot. Cash-and-carry institutional arbitrageurs enter by selling overvalued perpetual futures and purchasing spot collateral, locking in the basis yield plus funding payments. This arbitrage flow exerts systematic downward pressure on perpetual futures prices relative to spot. The reversion is accelerated when orderbook queue depth leans ask-heavy (negative depth imbalance) or when aggressive taker buying subsides (low taker buy ratio), signaling that aggressive buying demand has exhausted and leaving liquidity absorption to mean-reverting arbitrageurs.",
+  "research_rationale": "The locked candidate XL_l1_alt_2eca85242334 pools 22,310 matched bars (7.87% match rate) across all 7 L1 altcoin assets, generating 307 independent events and 307 active days. The joint predicate (basis_annualized > 0.0 and funding_rate_zscore_30d > 0.5) exhibits a positive lift of 1.236 over independence, confirming economic coupling between basis premium and funding pressure. Historical cemetery records show 1271 trials on basis_annualized with dominant death codes at T0.04-IC-STAT (858) and T1.10-ICIR (134), driven by high autocorrelation (0.69 at 1d) in raw linear basis. Gating by orderbook depth imbalance (cemetery survival 16.1%) and taker flow (cemetery survival 12.5%) mitigates drift by isolating discrete liquidity exhaustion states. Full search scope is adopted to evaluate the automatic grid across basis, funding, depth imbalance, and open interest."
+}
